@@ -1,9 +1,8 @@
 const express = require('express')
 const router = express.Router()
+const userAuth = require('./controllers/userAuth')
 
 // contoh percobaan
-router.get('/', (req, res) => {
-  res.send('halo, ini coba lagi')
-})
+router.get('/', userAuth.coba)
 
 module.exports = router
