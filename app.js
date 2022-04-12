@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const port = 3000;
+const { PORT = 3000} = process.env;
 
 // middleware
 const logger = (req, res, next) => {
@@ -12,6 +12,23 @@ app.use(express.json());
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: false }));
 
+// session
+const session = require('express-session')
+app.use(session({
+  secret: 'Web Speak Up Now sebagai TA Laila',
+  resave: false,
+  saveUninitialized: false
+}))
+
+// passport
+const passport = require('./lib/passport')
+app.use(passport.initialize())
+app.use(passport.session())
+
+// flash message
+const flash = require('express-flash')
+app.use(flash())
+
 // menggunakan view engine ejs
 app.set('view engine', 'ejs');
 
@@ -20,6 +37,6 @@ const router = require('./router')
 app.use(router)
 
 // menyalakan web server
-app.listen(port, () => {
-    console.log(`App listening at http://localhost:${port}`)
+app.listen(PORT, () => {
+    console.log(`App listening at http://localhost:${PORT}`)
 });
