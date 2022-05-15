@@ -1,10 +1,10 @@
 {
   "development": {
-    "username": "lailaalfisyah",
-    "password": "123456",
+    "username": "root",
+    "password": null,
     "database": "speakupnow",
     "host": "127.0.0.1",
-    "dialect": "postgres"
+    "dialect": "mysql"
   },
   "test": {
     "username": "root",
