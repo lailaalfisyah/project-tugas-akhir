@@ -14,7 +14,8 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Transactions.init({
-    coba: DataTypes.STRING
+    userID: DataTypes.INTEGER,
+    eventID: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Transactions',

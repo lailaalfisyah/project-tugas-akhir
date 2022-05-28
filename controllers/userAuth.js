@@ -1,4 +1,4 @@
-const { UserBiodata, Role } = require('../models')
+const { Users, Roles } = require('../models')
 const passport = require('../lib/passport')
 
 module.exports = {
@@ -7,7 +7,7 @@ module.exports = {
   },
 
   registerProcess: (req, res, next) => {
-    UserBiodata.register(req.body, req.body.roleID)
+    Users.register(req.body, req.body.roleID)
       .then(data => res.status(200).json(data))
       // .then(() => res.redirect('/login'))
       .catch(err => next(err))
@@ -39,7 +39,7 @@ module.exports = {
 
   // hanya untuk demo
   inputRole: (req, res) => {
-    Role.create({
+    Roles.create({
       desc: req.body.desc
     })
       .then(data => res.status(200).json(data))

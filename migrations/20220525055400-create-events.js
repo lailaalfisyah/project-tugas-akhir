@@ -2,13 +2,17 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('Events', {
-      eventID: {
+      // tambahin jam mulai dan berakhir
+      // tambahin tanggal mulai dan berakhir
+      id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      type: {
+      token: {
+        allowNull: false,
+        unique: true,
         type: Sequelize.STRING
       },
       title: {
@@ -19,9 +23,6 @@ module.exports = {
       },
       price: {
         type: Sequelize.INTEGER
-      },
-      location: {
-        type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,

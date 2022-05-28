@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const restrict = require('./middlewares/restrict')
 const userAuth = require('./controllers/userAuth')
+const coba = require('./controllers/coba')
 
 // AUTH
 
@@ -34,5 +35,9 @@ router.get('/whoami', restrict, (req, res) => {
 
 // menginput keterangan role user
 router.post('/role', userAuth.inputRole)
+
+// percobaan
+router.get('/cobainput', coba.inputForm)
+router.post('/cobainput', coba.inputProcess)
 
 module.exports = router
