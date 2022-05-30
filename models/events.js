@@ -15,11 +15,10 @@ module.exports = (sequelize, DataTypes) => {
   };
   Events.init({
     token: DataTypes.STRING,
-    type: DataTypes.STRING,
     title: DataTypes.STRING,
-    date: DataTypes.DATEONLY,
+    dateStart: DataTypes.DATEONLY,
+    timeStart: DataTypes.TIME,
     price: DataTypes.INTEGER,
-    location: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Events',

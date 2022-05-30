@@ -39,5 +39,6 @@ router.post('/role', userAuth.inputRole)
 // percobaan
 router.get('/cobainput', coba.inputForm)
 router.post('/cobainput', coba.inputProcess)
+router.get('/cobaoutput', coba.output)
 
 module.exports = router

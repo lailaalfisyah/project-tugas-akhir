@@ -8,12 +8,19 @@ module.exports = {
   inputProcess: (req, res) => {
     Events.create({
       token: req.body.token,
-      type: req.body.type,
       title: req.body.title,
-      date: req.body.date,
-      location: req.body.location,
+      dateStart: req.body.dateStart,
+      dateEnd: req.body.dateEnd,
+      timeStart: req.body.timeStart,
+      timeEnd: req.body.timeEnd,
       price: req.body.price
     })
       .then(data => res.status(200).json(data))
+  },
+
+  output: (req, res) => {
+    Events.findAll().then(data => {
+      res.render('coba/outputEvent', {data})
+    })
   }
 }
