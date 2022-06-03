@@ -42,6 +42,9 @@ router.post('/regisEvent/:id', restrict, eventManage.registration)
 // mencocokkan token yang di-input peserta dengan database
 router.post('/matchTheToken', eventManage.matchTheToken)
 
+// menggabungkan tabel users, transactions, dan events untuk laporan admin
+router.get('/report', eventManage.adminReport)
+
 // LAIN-LAIN
 
 // halaman beranda sementara
@@ -60,5 +63,6 @@ router.post('/role', userAuth.inputRole)
 
 // percobaan
 router.get('/certif', coba.certif)
+router.get('/count', coba.count)
 
 module.exports = router

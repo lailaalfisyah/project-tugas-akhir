@@ -1,28 +1,15 @@
 'use strict';
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('Certificates', {
+    await queryInterface.createTable('Cobas', {
       id: {
         allowNull: false,
         autoIncrement: false,
         primaryKey: true,
         type: Sequelize.STRING
       },
-      transID: {
-        allowNull: false,
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'Transactions',
-          key: 'id'
-        }
-      },
-      certifNumber: {
-        allowNull: false,
-        unique: true,
+      content: {
         type: Sequelize.STRING
-      },
-      file: {
-        type: Sequelize.BLOB
       },
       createdAt: {
         allowNull: false,
@@ -35,6 +22,6 @@ module.exports = {
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('Certificates');
+    await queryInterface.dropTable('Cobas');
   }
 };

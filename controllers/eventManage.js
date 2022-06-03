@@ -1,4 +1,4 @@
-const { Events, Transactions } = require('../models')
+const { Events, Transactions, Users } = require('../models')
 
 module.exports = {
   inputForm: (req, res) => {
@@ -33,5 +33,18 @@ module.exports = {
   matchTheToken: (req, res) => {
     Events.matchToken(req.body)
       .then(data => res.status(200).json(data))
+  },
+
+  adminReport: (req, res) => {
+    Transactions.findAll({
+      include: [{
+        model: Events,
+        required: true
+      }, {
+        model: Users,
+        required: true
+      }]
+    })
+      .then(data => res.render('management/adminReport', { data }))
   }
 }

@@ -31,6 +31,9 @@ module.exports = {
       price: {
         type: Sequelize.INTEGER
       },
+      desc: {
+        type: Sequelize.TEXT
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
