@@ -2,8 +2,6 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('Events', {
-      // tambahin jam mulai dan berakhir
-      // tambahin tanggal mulai dan berakhir
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -19,16 +17,16 @@ module.exports = {
         type: Sequelize.STRING
       },
       dateStart: {
-        type: Sequelize.DATEONLY
+        type: Sequelize.STRING
       },
       dateEnd: {
-        type: Sequelize.DATEONLY
+        type: Sequelize.STRING
       },
       timeStart: {
-        type: Sequelize.TIME
+        type: Sequelize.STRING
       },
       timeEnd: {
-        type: Sequelize.TIME
+        type: Sequelize.STRING
       },
       price: {
         type: Sequelize.INTEGER

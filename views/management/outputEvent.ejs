@@ -11,6 +11,7 @@
                   <th scope="col">Date Start</th>
                   <th scope="col">Time Start</th>
                   <th scope="col">Price</th>
+                  <th scope="col">Action</th>
                   <!-- <th scope="col" colspan="3"></th> -->
                 </tr>
               </thead>                
@@ -22,6 +23,7 @@
                   <td><%= i.dateStart%></td>
                   <td><%= i.timeStart %></td>
                   <td><%= i.price %></td>
+                  <td><a href="/detailEvent/<%= i.id %>">Detail</a></td>
                   <!-- <td><a href="/history/<%= i.id %>"><i class="fas fa-history"></i></a></td>
                   <td><a href="/update/<%= i.id %>"><i class="fas fa-edit"></i></a></td>
                   <td><a href="/delete/<%= i.id %>"><i class="fas fa-trash-alt"></i></a></td> -->

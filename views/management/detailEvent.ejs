@@ -1,0 +1,39 @@
+<div class="container">
+  <div class="row">
+      <div class="col mt-5">
+          <h1 class="text-center">PERCOBAAN OUTPUT TABEL EVENTS</h1><br>
+          <!-- <a href="/create" class="btn btn-primary">Tambah Data</a> -->
+          <table class="table">
+              <thead>
+                <tr class="text-center">
+                  <th scope="col">ID</th>
+                  <th scope="col">Title</th>
+                  <th scope="col">Date Start</th>
+                  <th scope="col">Date End</th>
+                  <th scope="col">Time Start</th>
+                  <th scope="col">Time End</th>
+                  <th scope="col">Price</th>
+                  <th scope="col">Action</th>
+                  <!-- <th scope="col" colspan="3"></th> -->
+                </tr>
+              </thead>                
+              <tbody>
+                <tr class="text-center">
+                  <td><%= data.id %></td>
+                  <td><%= data.title %></td>
+                  <td><%= data.dateStart%></td>
+                  <td><%= data.dateEnd%></td>
+                  <td><%= data.timeStart %></td>
+                  <td><%= data.timeEnd %></td>
+                  <td><%= data.price %></td>
+                  <td>
+                    <form method="POST" action="/regisEvent/<%= data.id %>">
+                      <button type="submit" class="btn btn-primary">Registration</button>
+                    </form>
+                  </td>
+                </tr>
+              </tbody>
+          </table>
+      </div>
+  </div>
+</div>

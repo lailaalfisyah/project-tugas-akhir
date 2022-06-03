@@ -8,8 +8,8 @@ module.exports = {
 
   registerProcess: (req, res, next) => {
     Users.register(req.body, req.body.roleID)
-      .then(data => res.status(200).json(data))
-      // .then(() => res.redirect('/login'))
+      // .then(data => res.status(200).json(data))
+      .then(() => res.redirect('/login'))
       .catch(err => next(err))
   },
 

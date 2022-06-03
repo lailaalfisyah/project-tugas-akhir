@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const restrict = require('./middlewares/restrict')
 const userAuth = require('./controllers/userAuth')
+const eventManage = require('./controllers/eventManage')
 const coba = require('./controllers/coba')
 
 // AUTH
@@ -21,6 +22,26 @@ router.post('/login', userAuth.loginProcess)
 // memproses logout
 router.get('/logout', userAuth.logoutProcess)
 
+// MANAGEMENT
+
+// menuju form input event
+router.get('/inputEvent', eventManage.inputForm)
+
+// memproses data event yang di-input
+router.post('/inputEvent', eventManage.inputProcess)
+
+// menampilkan daftar events
+router.get('/outputEvent', eventManage.output)
+
+// menampilkan detai event
+router.get('/detailEvent/:id', eventManage.detail)
+
+// memproses pendaftaran event
+router.post('/regisEvent/:id', restrict, eventManage.registration)
+
+// mencocokkan token yang di-input peserta dengan database
+router.post('/matchTheToken', eventManage.matchTheToken)
+
 // LAIN-LAIN
 
 // halaman beranda sementara
@@ -31,14 +52,13 @@ router.get('/', (req, res) => {
 // tes variabel user di halaman profile sementara
 router.get('/whoami', restrict, (req, res) => {
   res.render('profile', req.user.dataValues)
+  // res.send(req.user.dataValues)
 })
 
 // menginput keterangan role user
 router.post('/role', userAuth.inputRole)
 
 // percobaan
-router.get('/cobainput', coba.inputForm)
-router.post('/cobainput', coba.inputProcess)
-router.get('/cobaoutput', coba.output)
+router.get('/certif', coba.certif)
 
 module.exports = router
