@@ -7,6 +7,14 @@ const pdf = require('html-pdf')
 // const Op = Sequelize.Op
 
 module.exports = {
+  customID: (req, res) => {
+    Events.customID()
+      .then(id => {
+        Events.inputEvent(id, req.body)
+          .then(data => res.status(200).json(data))
+      })
+  },
+
   certif: (req, res) => {    
     Events.findOne({
       where: { id: 1 }

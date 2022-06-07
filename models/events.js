@@ -13,7 +13,9 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
 
-    static inputEvent = ({ token, title, dateStart, dateEnd, timeStart, timeEnd, price }) => {
+    
+
+    static inputEvent = (eventID, { token, title, dateStart, dateEnd, timeStart, timeEnd, price }) => {
       let ds = dateAndTime.transform(dateStart, 'YYYY-MM-DD', 'dddd, DD MMMM YYYY')
       let de = dateAndTime.transform(dateEnd, 'YYYY-MM-DD', 'dddd, DD MMMM YYYY')
       let ts = dateAndTime.transform(timeStart, 'HH:mm:ss', 'HH:mm [WIB]')
@@ -23,7 +25,10 @@ module.exports = (sequelize, DataTypes) => {
         de = ''
       }
 
+      this.removeAttribute('id')
+
       return this.create({
+        eventID,
         token,
         title,
         dateStart: ds,
@@ -60,6 +65,7 @@ module.exports = (sequelize, DataTypes) => {
   };
 
   Events.init({
+    eventID: DataTypes.STRING,
     token: DataTypes.STRING,
     title: DataTypes.STRING,
     dateStart: DataTypes.STRING,

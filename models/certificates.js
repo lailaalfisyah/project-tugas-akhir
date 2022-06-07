@@ -15,6 +15,7 @@ module.exports = (sequelize, DataTypes) => {
   };
   
   Certificates.init({
+    certifID: DataTypes.STRING,
     file: DataTypes.BLOB
   }, {
     sequelize,

@@ -1,4 +1,8 @@
-const { Events, Transactions, Users } = require('../models')
+const { Events, Transactions, Users, General } = require('../models')
+const { Op } = require('sequelize')
+const dateAndTime = require('date-and-time');
+const year = dateAndTime.format(new Date(), 'YY')
+const containsThisYear = { [Op.like]: `%${year}%` }
 
 module.exports = {
   eventList: (req, res) => {
@@ -42,8 +46,11 @@ module.exports = {
   },
 
   inputEventProcess: (req, res) => {
-    Events.inputEvent(req.body)
-      .then(() => res.redirect('/outputEvent'))
+    General.customID('E', Events, { eventID: containsThisYear })
+      .then(customizedID => {
+        Events.inputEvent(customizedID, req.body)
+          .then(() => res.redirect('/'))
+      })
   },
 
   transactionsReport: (req, res) => {

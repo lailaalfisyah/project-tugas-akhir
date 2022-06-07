@@ -73,7 +73,7 @@ router.post('/role', userAuth.inputRole)
 // })
 
 // // percobaan
-// router.get('/certif', coba.certif)
+router.get('/customID', coba.customID)
 // router.get('/adminReport', coba.adminReport)
 
 module.exports = router

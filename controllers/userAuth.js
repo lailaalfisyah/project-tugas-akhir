@@ -40,6 +40,8 @@ module.exports = {
   // JUST DEMO
 
   inputRole: (req, res) => {
+    Roles.removeAttribute('id')
+    
     Roles.create({
       desc: req.body.desc
     })
