@@ -2,7 +2,7 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('Cobas', {
-      id: {
+      cobaID: {
         allowNull: false,
         autoIncrement: false,
         primaryKey: true,

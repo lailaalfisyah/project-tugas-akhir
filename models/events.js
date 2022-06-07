@@ -1,5 +1,5 @@
 'use strict';
-const { Model } = require('sequelize');
+const { Model, Op } = require('sequelize');
 const dateAndTime = require('date-and-time');
 
 module.exports = (sequelize, DataTypes) => {
@@ -46,6 +46,16 @@ module.exports = (sequelize, DataTypes) => {
       catch(err) {
         return Promise.reject(err)
       }
+    }
+
+    static hitung() {
+      return this.count({
+        where: { 
+          dateStart: {
+            [Op.lte]: 2021
+          } 
+        }
+      })
     }
   };
 

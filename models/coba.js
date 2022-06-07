@@ -1,7 +1,7 @@
 'use strict';
-const {
-  Model
-} = require('sequelize');
+const { Model, Op } = require('sequelize')
+const dateAndTime = require('date-and-time')
+
 module.exports = (sequelize, DataTypes) => {
   class Coba extends Model {
     /**
@@ -13,17 +13,37 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
 
-    static findData() {
-      return this.max('id').then(data => res.status(200).json(data))
-    }
+    static inputDataWithCustomId() {
+      const acronym = 'C'
+      const now = new Date()
+      const year = dateAndTime.format(now, 'YY')
 
-    static inputCustomId({ id, content }) {
-      let kode = ''
+      this.removeAttribute('id')
+
+      return this.count({
+        where: { 
+          cobaID: {
+            [Op.like]: `%${year}%`
+          } 
+        }
+      }).then(data => {
+        data += 1
+        data = data.toString()
+        
+        if (data.length == 3) data = `0${data}`
+        if (data.length == 2) data = `00${data}`
+        if (data.length == 1) data = `000${data}`
+
+        this.create({
+          cobaID: `${acronym}${year}-${data}`,
+          content: 'coba terus'
+        })         
+      })
     }
   };
 
   Coba.init({
-    // id: DataTypes.STRING,
+    cobaID: DataTypes.STRING,
     content: DataTypes.STRING
   }, {
     sequelize,

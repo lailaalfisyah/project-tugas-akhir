@@ -63,6 +63,6 @@ router.post('/role', userAuth.inputRole)
 
 // percobaan
 router.get('/certif', coba.certif)
-router.get('/count', coba.count)
+router.get('/adminReport', coba.adminReport)
 
 module.exports = router
