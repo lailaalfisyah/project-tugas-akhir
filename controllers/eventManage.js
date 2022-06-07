@@ -1,31 +1,29 @@
 const { Events, Transactions, Users } = require('../models')
 
 module.exports = {
-  inputForm: (req, res) => {
-    res.render('management/inputEvent')
-  },
-
-  inputProcess: (req, res) => {
-    Events.inputEvent(req.body)
-      .then(() => res.redirect('/outputEvent'))
-  },
-
-  output: (req, res) => {
+  eventList: (req, res) => {
     Events.findAll()
-      .then(data => res.render('management/outputEvent', { data }))
+      .then(data => res.render('management/eventList', { data }))
   },
 
-  detail: (req, res) => {
+  eventDetail: (req, res) => {
     Events.findOne({
       where: { id: req.params.id }
     })
-      .then(data => res.render('management/detailEvent', { data }))
+      .then(data => res.render('management/eventDetail', { data }))
   },
 
-  registration: (req, res) => {
+  eventRegistration: (req, res) => {
     Transactions.create({
       userID: req.user.id,
       eventID: req.params.id
+    })
+      .then(data => res.status(200).json(data))
+  },
+
+  transationProof: (req, res) => {
+    Transactions.findOne({
+      where: { id: req.params.id }
     })
       .then(data => res.status(200).json(data))
   },
@@ -35,7 +33,20 @@ module.exports = {
       .then(data => res.status(200).json(data))
   },
 
-  adminReport: (req, res) => {
+
+
+  // ONLY FOR ADMIN
+
+  inputEventForm: (req, res) => {
+    res.render('management/inputEvent')
+  },
+
+  inputEventProcess: (req, res) => {
+    Events.inputEvent(req.body)
+      .then(() => res.redirect('/outputEvent'))
+  },
+
+  transactionsReport: (req, res) => {
     Transactions.findAll({
       include: [{
         model: Events,

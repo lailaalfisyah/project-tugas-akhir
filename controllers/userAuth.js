@@ -18,7 +18,7 @@ module.exports = {
   },
 
   loginProcess: passport.authenticate('local', {
-    successRedirect: '/whoami',
+    successRedirect: '/',
     failureRedirect: '/login',
     failureFlash: true
   }),
@@ -37,7 +37,8 @@ module.exports = {
     }
   },
 
-  // hanya untuk demo
+  // JUST DEMO
+
   inputRole: (req, res) => {
     Roles.create({
       desc: req.body.desc
