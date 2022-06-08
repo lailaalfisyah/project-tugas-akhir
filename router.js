@@ -66,14 +66,14 @@ router.post('/role', userAuth.inputRole)
 
 // // LAIN-LAIN
 
-// // tes variabel user di halaman profile sementara
-// router.get('/whoami', restrict, (req, res) => {
-//   res.render('profile', req.user.dataValues)
-//   // res.send(req.user.dataValues)
-// })
+// tes variabel user di halaman profile sementara
+router.get('/whoami', restrict, (req, res) => {
+  res.render('profile', req.user.dataValues)
+  // res.send(req.user.dataValues)
+})
 
 // // percobaan
-router.get('/customID', coba.customID)
+router.get('/tryToFindOne', coba.tryToFindOne)
 // router.get('/adminReport', coba.adminReport)
 
 module.exports = router

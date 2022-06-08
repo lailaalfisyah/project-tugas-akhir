@@ -3,8 +3,8 @@
       <div class="col-lg-6">
           <h1 class="text-center">FORM LOGIN ADMIN</h1><br>
           
-          <% if(messages.err) { %>
-            <h5><%= messages.err %></h5>
+          <% if(messages.error) { %> 
+            <h5><%= messages.error %></h5>
           <% } %>
           
           <form method="POST" action="/login">

@@ -7,6 +7,8 @@ module.exports = () => {
     static customID(acronym, theModel, { tableID }) {
       const year = dateAndTime.format(new Date(), 'YY')
 
+      theModel.removeAttribute('id')
+
       return theModel.count({
         where: tableID
       }).then(data => {

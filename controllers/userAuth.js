@@ -1,5 +1,9 @@
-const { Users, Roles } = require('../models')
+const { Users, Roles, General } = require('../models')
 const passport = require('../lib/passport')
+const { Op } = require('sequelize')
+const dateAndTime = require('date-and-time');
+const year = dateAndTime.format(new Date(), 'YY')
+const containsThisYear = { [Op.like]: `%${year}%` }
 
 module.exports = {
   registerForm: (req, res) => {
@@ -7,10 +11,13 @@ module.exports = {
   },
 
   registerProcess: (req, res, next) => {
-    Users.register(req.body, req.body.roleID)
-      // .then(data => res.status(200).json(data))
-      .then(() => res.redirect('/login'))
-      .catch(err => next(err))
+    General.customID('U', Users, { userID: containsThisYear})
+      .then(customizedID => {
+        Users.register(customizedID, req.body, req.body.roleID)
+          // .then(data => res.status(200).json(data))
+          .then(() => res.redirect('/login'))
+          .catch(err => next(err))
+      })    
   },
 
   loginForm: (req, res) => {

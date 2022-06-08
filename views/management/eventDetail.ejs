@@ -19,7 +19,7 @@
               </thead>                
               <tbody>
                 <tr class="text-center">
-                  <td><%= data.id %></td>
+                  <td><%= data.eventID %></td>
                   <td><%= data.title %></td>
                   <td><%= data.dateStart%></td>
                   <td><%= data.dateEnd%></td>
@@ -27,7 +27,7 @@
                   <td><%= data.timeEnd %></td>
                   <td><%= data.price %></td>
                   <td>
-                    <form method="POST" action="/eventRegistration/<%= data.id %>">
+                    <form method="POST" action="/eventRegistration/<%= data.eventID %>">
                       <button type="submit" class="btn btn-primary">Registration</button>
                     </form>
                   </td>

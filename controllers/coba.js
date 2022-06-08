@@ -108,5 +108,13 @@ module.exports = {
       content: 'Cobain 1'
     })
       .then(data => res.status(200).json(data))
+  },
+
+  tryToFindOne: (req, res) => {
+    Users.removeAttribute('id')
+    Users.findOne({
+      where: { username: 'dfdsf' }
+    })
+      .then(data => res.status(200).json(data))
   }
 }

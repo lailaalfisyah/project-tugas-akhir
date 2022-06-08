@@ -6,23 +6,29 @@ const containsThisYear = { [Op.like]: `%${year}%` }
 
 module.exports = {
   eventList: (req, res) => {
+    Events.removeAttribute('id')
     Events.findAll()
       .then(data => res.render('management/eventList', { data }))
   },
 
   eventDetail: (req, res) => {
+    Events.removeAttribute('id')
     Events.findOne({
-      where: { id: req.params.id }
+      where: { eventID: req.params.id }
     })
       .then(data => res.render('management/eventDetail', { data }))
   },
 
   eventRegistration: (req, res) => {
-    Transactions.create({
-      userID: req.user.id,
-      eventID: req.params.id
-    })
-      .then(data => res.status(200).json(data))
+    General.customID('T', Transactions, { transID: containsThisYear })
+      .then(customizedID => {
+        Transactions.create({
+          transID: customizedID,
+          userID: req.user.userID,
+          eventID: req.params.id
+        })
+          .then(data => res.status(200).json(data))
+      })   
   },
 
   transationProof: (req, res) => {

@@ -17,9 +17,11 @@ module.exports = (sequelize, DataTypes) => {
     static #encrypt = password => bcrypt.hashSync(password, 10)
 
     // memproses registrasi
-    static register = ({ fullName, email, username, password, birthDate, gender, domicile, profession }, roleID = 2) => {
+    static register = (userID, { fullName, email, username, password, birthDate, gender, domicile, profession }, roleID = 2) => {
       const encryptedPassword = this.#encrypt(password)
       return this.create({
+        userID,
+        roleID,
         fullName,
         email,
         username,
@@ -27,8 +29,7 @@ module.exports = (sequelize, DataTypes) => {
         birthDate,
         gender,
         domicile,
-        profession,
-        roleID
+        profession
       })
     }
 
@@ -38,17 +39,19 @@ module.exports = (sequelize, DataTypes) => {
     // proses autentikasi user
     static authenticate = async ({ username, password }) => {
       try {
+        this.removeAttribute('id')
+
         const user = await this.findOne({
           where: { username }
         })
         const isPasswordValid = user.checkPassword(password)
 
-        if (!user) return Promise.reject('User not found!')
+        // if (!user) return Promise.reject('User not found!')
         if (!isPasswordValid) return Promise.reject('Wrong password')
         return Promise.resolve(user)
       } 
       catch(err) {
-        return Promise.reject(err)
+        return Promise.reject('User not found!')
       }
     }
   };
