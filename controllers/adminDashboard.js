@@ -1,17 +1,36 @@
 const { Events, Transactions, Users, General } = require('../models')
 const pdf = require('html-pdf')
+const fs = require('fs')
 
 module.exports = {
-  home: (req, res) => {
-    Events.findAll()
-      .then(data => res.render('home', { data }))
+  dashboard: (req, res) => {
+    // isi dengan count/perhitungan dari berbagai models
+    // letakkan saja hal-hal yang sekiranya pantas dipajang di dasbor
+    // contohnya jumlah users, events, transactions, dan total penghasilan
+    
+    res.render('adminDashboard/dashboard')
   },
 
-  eventList: (req, res) => {
+  userData: (req, res) => {
+    Users.findAll()
+      .then(data => res.render('adminDashboard/userData', {
+        data
+      }))
+  },
+
+  userDetail: (req, res) => {
+    Users.findOne({
+      where: { id: req.params.id }
+    })
+      .then(data => res.render('adminDashboard/userDetail', {
+        data
+      }))
+  },
+
+  eventData: (req, res) => {
     Events.findAll()
-      .then(data => res.render('management/eventList', {
-        data,
-        user: req.user.dataValues
+      .then(data => res.render('adminDashboard/eventData', {
+        data
       }))
   },
 
@@ -19,71 +38,45 @@ module.exports = {
     Events.findOne({
       where: { id: req.params.id }
     })
-      .then(data => res.render('management/eventDetail', {
-        data,
-        user: req.user.dataValues
+      .then(data => res.render('adminDashboard/eventDetail', {
+        data
       }))
   },
 
-  eventRegistration: (req, res) => {
-    General.customID('T', Transactions)
+  inputEventForm: (req, res) => {
+    res.render('adminDashboard/inputEvent')
+  },
+
+  inputEventProcess: (req, res) => {
+    General.customID('E', Events)
       .then(customizedID => {
-        Transactions.create({
-          id: customizedID,
-          userID: req.user.id,
-          eventID: req.params.id
-        })
-          .then(data => res.redirect(`/transactionProof/${data.id}`))
-      })   
-  },
-
-  matchTheToken: (req, res) => {
-    Transactions.findOne({
-      where: { id: req.params.id },
-      include: [{
-        model: Events,
-        required: true
-      }, {
-        model: Users,
-        required: true
-      }]
-    })
-      .then(data => {
-        if (req.body.token !== data.Event.token) {
-          res.json('Invalid Token!')
-        } else {
-          res.json('Congratulations! You got the certificate.')
-        }
+        Events.inputEvent(customizedID, req.body)
+          .then(() => res.redirect('/eventData'))
       })
   },
 
-  generateCertif: (req, res) => {    
+  editEventForm: (req, res) => {
     Events.findOne({
-      where: { id: 1 }
+      where: { id: req.params.id }
     })
-      .then(data => {
-        const ejs = `<div id="capture" style="padding: 10px; background: #f5da55">
-          <h4 style="color: #000; ">Hello world! ${data.title}</h4>
-        </div>`
-
-        const options = {
-          format: 'A4',
-          orientation: 'landscape'
-        }
-
-        res.render('management/detailEvent', { data })
-        pdf.create(ejs, options).toFile('views/coba/hasilcertif7.pdf', (err, data) => {
-          if (err) return console.log(err)
-          console.log(data)
-        })
-      })
+      .then(data => res.render('adminDashboard/editEvent', {
+        data
+      }))
   },
 
+  editEventProcess: (req, res) => {
+    Events.updateEvent(req.body)
+      .then(() => res.redirect('/eventData'))
+  },
 
+  deleteEvent: (req, res) => {
+    Events.delete({
+      where: { id: req.params.id }
+    })
+      .then(() => res.redirect('/eventData'))
+  },
 
-  // ONLY FOR ADMIN
-
-  dashboard: (req, res) => {
+  transactionData: (req, res) => {
     Transactions.findAll({
       include: [{
         model: Events,
@@ -96,32 +89,23 @@ module.exports = {
         ['id', 'DESC']
       ]
     })
-      .then(data => res.render('management/transactionsReport', {
+      .then(data => res.render('adminDashboard/transactionData', {
         data, 
         // user: req.user.dataValues
       }))
   },
 
-  eventsData: (req, res) => {
-    Events.findAll()
-      .then(data => res.render('management/eventsData', {
-        data
+  transactionDetail: (req, res) => {
+    Transactions.findOne({
+      where: { id: req.params.id }
+    })
+      .then(data => res.render('adminDashboard/transactionDetail', {
+        data, 
+        // user: req.user.dataValues
       }))
   },
 
-  inputEventForm: (req, res) => {
-    res.render('management/inputEvent')
-  },
-
-  inputEventProcess: (req, res) => {
-    General.customID('E', Events)
-      .then(customizedID => {
-        Events.inputEvent(customizedID, req.body)
-          .then(() => res.redirect('/eventsData'))
-      })
-  },
-
-  transactionsReport: (req, res) => {
+  transactionReport: (req, res) => {
     Transactions.findAll({
       include: [{
         model: Events,
@@ -143,10 +127,12 @@ module.exports = {
           orientation: 'potrait'
         }
 
-        res.render('management/adminReport', { data })
         pdf.create(ejs, options).toFile('views/coba/hasilcertif7.pdf', (err, data) => {
           if (err) return console.log(err)
           console.log(data)
+          let report = fs.readFileSync(data)
+          res.contentType('application/pdf')
+          res.send(report)
         })
       })
   }

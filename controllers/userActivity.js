@@ -1,15 +1,16 @@
 const { Events, Transactions, Users, General } = require('../models')
 const pdf = require('html-pdf')
+const fs = require('fs')
 
 module.exports = {
-  home: (req, res) => {
-    Events.findAll()
-      .then(data => res.render('home', { data }))
-  },
+  // home: (req, res) => {
+  //   Events.findAll()
+  //     .then(data => res.render('home', { data }))
+  // },
 
   eventList: (req, res) => {
     Events.findAll()
-      .then(data => res.render('management/eventList', {
+      .then(data => res.render('userActivity/eventList', {
         data,
         user: req.user.dataValues
       }))
@@ -19,7 +20,7 @@ module.exports = {
     Events.findOne({
       where: { id: req.params.id }
     })
-      .then(data => res.render('management/eventDetail', {
+      .then(data => res.render('userActivity/eventDetail', {
         data,
         user: req.user.dataValues
       }))
@@ -48,7 +49,7 @@ module.exports = {
         required: true
       }]
     })
-      .then(data => res.render('management/transactionProof', {
+      .then(data => res.render('userActivity/transactionProof', {
         data,
         user: req.user.dataValues
       }))
@@ -69,12 +70,12 @@ module.exports = {
         if (req.body.token !== data.Event.token) {
           res.json('Invalid Token!')
         } else {
-          res.json('Congratulations! You got the certificate.')
+          res.redirect('/certificate')
         }
       })
   },
 
-  generateCertif: (req, res) => {    
+  certificate: (req, res) => {    
     Events.findOne({
       where: { id: 1 }
     })
@@ -88,10 +89,13 @@ module.exports = {
           orientation: 'landscape'
         }
 
-        res.render('management/detailEvent', { data })
-        pdf.create(ejs, options).toFile('views/coba/hasilcertif7.pdf', (err, data) => {
+        // res.render('userActivity/detailEvent', { data })
+        pdf.create(ejs, options).toFile('views/certificates/mycertif.pdf', (err, data) => {
           if (err) return console.log(err)
           console.log(data)
+          let certif = fs.readFileSync(data)
+          res.contentType('application/pdf')
+          res.send(certif)
         })
       })
   },
@@ -107,7 +111,7 @@ module.exports = {
         ['updatedAt', 'DESC']
       ]
     })
-      .then(data => res.render('userAccount/profile', {
+      .then(data => res.render('userActivity/profile', {
         data,
         user: req.user.dataValues
       }))
@@ -117,7 +121,7 @@ module.exports = {
     Users.findOne({
       where: { id: req.user.id }
     })
-      .then(data => res.render('userAccount/editProfile', {
+      .then(data => res.render('userActivity/editProfile', {
         data,
         user: req.user.dataValues
       }))
@@ -125,6 +129,7 @@ module.exports = {
 
   editProfileProcess: (req, res) => {
     Users.updateProfile(req.user.id, req.body)
-      .then(data => res.status(200).json(data))
+      // .then(data => res.status(200).json(data))
+      .then(() => res.redirect('/profile'))
   }
 }

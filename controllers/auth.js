@@ -32,7 +32,7 @@ module.exports = {
         if (err) {
           res.status(400).send('Unable to logout')
         } else {
-          res.send('Logout successful')
+          res.redirect('/login')
         }
       })
     } else {
