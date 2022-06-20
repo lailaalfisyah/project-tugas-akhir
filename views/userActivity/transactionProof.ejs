@@ -2,32 +2,33 @@
 
 <%- include('../layouts/navbar') %>
 
-<section class="section">
+<section class="section mt-5 mb-5">
   <div class="container">
     <div class="row justify-content-center mb-5">
       <div class="col-md-6">
         <div class="card mb-3">
           <div class="card-body">
-            <h6 class="card-title text-center p-1 bg-warning">ID Transaksi: <%= data.id %></h6>
+            <h6 class="card-title text-center p-1 bg-warning">Transaction ID: <%= data.id %></h6>
             <h3 class="card-text text-center mt-3 mb-3"><%= data.Event.title %></h3>
             <table class="table">
                 <tr>
-                  <th>Nama Peserta</th>
+                  <th>Name of Participant</th>
                   <td>: <%= data.User.fullName%></td>
                 </tr>
                 <tr>
-                  <th>Tanggal Acara</th>
+                  <th>Date of Event</th>
                   <td>: <%= data.Event.dateStart%></td>
                 </tr>
                 <tr>
-                  <th>Waktu Acara</th>
+                  <th>Time of Event</th>
                   <td>: <%= data.Event.timeStart%> - <%= data.Event.timeEnd%></td>
                 </tr>
-                <tr>
-                  <th>Mendaftar Pada</th>
-                  <td>: <%= data.createdAt%></td>
-                </tr>
             </table>
+            <br>
+            <div class="alert alert-warning text-center">
+              <h6>Registered at :</h6>
+              <p><%= data.createdAt %></p>
+            </div>
           </div>
         </div>
       </div>
@@ -36,10 +37,10 @@
       <div class="col-md-6">
         <form method="POST" action="/matchTheToken/<%= data.id %>" target="_blank">
           <div class="mb-3">
-            <label for="token" class="form-label">Apabila Anda telah selesai mengikuti webinar, input token yang diberikan oleh panitia untuk mendapatkan e-certificate.</label>
+            <label for="token" class="form-label">If you have finished participating in the webinar, input the token given by the event organizer to get an e-certificate.</label>
             <input type="text" class="form-control" id="token" name="token">
           </div>
-            <button type="submit" class="btn btn-danger btn-sm">Cocokkan Token</button>
+            <button type="submit" class="btn btn-danger btn-sm">Match the Token</button>
         </form>
       </div>  
     </div>

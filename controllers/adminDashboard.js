@@ -51,7 +51,7 @@ module.exports = {
     General.customID('E', Events)
       .then(customizedID => {
         Events.inputEvent(customizedID, req.body)
-          .then(() => res.redirect('/eventData'))
+          .then(() => res.redirect('/admin/eventData'))
       })
   },
 
@@ -66,14 +66,7 @@ module.exports = {
 
   editEventProcess: (req, res) => {
     Events.updateEvent(req.body)
-      .then(() => res.redirect('/eventData'))
-  },
-
-  deleteEvent: (req, res) => {
-    Events.delete({
-      where: { id: req.params.id }
-    })
-      .then(() => res.redirect('/eventData'))
+      .then(() => res.redirect('/admin/eventData'))
   },
 
   transactionData: (req, res) => {
@@ -97,7 +90,14 @@ module.exports = {
 
   transactionDetail: (req, res) => {
     Transactions.findOne({
-      where: { id: req.params.id }
+      where: { id: req.params.id },
+      include: [{
+        model: Events,
+        required: true
+      }, {
+        model: Users,
+        required: true
+      }]
     })
       .then(data => res.render('adminDashboard/transactionDetail', {
         data, 

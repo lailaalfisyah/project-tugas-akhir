@@ -9,12 +9,17 @@
         <h2 class="text-center text-warning">EDIT PROFILE</h2>
       </div>
     </div>
-    <div class="row justify-content-center">
-      <div class="col-md-4">
-        <img src="/assets/img/bg-certif.jpg" class="img-thumbnail mx-auto rounded-circle" alt="" style="width: 15rem; height: 15rem;">
-      </div>
-      <div class="col-md-4">
-        <form method="POST" action="/editProfile">
+    <form method="POST" action="/editProfile">
+      <div class="row justify-content-center">
+        <div class="col-md-4 text-center">
+          <img src="/assets/img/profile-laila.jpg" class="img-thumbnail rounded-circle" alt="" style="width: 15rem; height: 15rem;">
+          <br><br>
+          <div class="mb-3">
+            <label for="profilePicture" class="form-label">Change your profile picture here!</label>
+            <input type="file" class="form-control" id="profilePicture" name="profilePicture">
+          </div>
+        </div>
+        <div class="col-md-4 offset-md-1">
           <div class="form-floating mb-3">
             <input type="text" class="form-control" id="fullName" name="fullName" value="<%= user.fullName %>" placeholder="Full Name" required>
             <label for="fullName" class="form-label">Full Name</label>

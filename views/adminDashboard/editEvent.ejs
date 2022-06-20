@@ -1,0 +1,55 @@
+<%- include('../layouts/header') %>
+
+<%- include('../layouts/adminNavbar') %>
+
+<section class="section mt-5 mb-5">
+  <div class="container">
+    <div class="row justify-content-center mb-5">
+      <div class="col-md-6">
+        <h2 class="text-center text-warning">EDIT EVENT</h2>
+      </div>
+    </div>
+    <form method="POST" action="/editEvent/<%= data.id %>">
+      <div class="row justify-content-center">
+        <div class="col-md-4">
+          <img src="/assets/img/bg-certif.jpg" alt="" class="img-thumbnail mx-auto" alt="">
+          <br><br>
+          <div class="mb-3">
+            <label for="poster" class="form-label">Change the poster event here!</label>
+            <input type="file" class="form-control" id="poster" name="poster" required>
+          </div>
+        </div>
+        <div class="col-md-4 offset-md-1">
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="token" name="token" placeholder="Token" value="<%= data.token %>" required>
+            <label for="token" class="form-label">Token</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="title" name="title" placeholder="Title" value="<%= data.title %>" required>
+            <label for="title" class="form-label">Title</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="date" class="form-control" id="dateStart" name="dateStart" placeholder="Date" value="<%= data.dateStart %>" required>
+            <label for="dateStart" class="form-label">Date</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="time" class="form-control" id="timeStart" name="timeStart" placeholder="Time Start" value="<%= data.timeStart %>" required>
+            <label for="timeStart" class="form-label">Time Start</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="time" class="form-control" id="timeEnd" name="timeEnd" placeholder="Time End" value="<%= data.timeEnd %>" required>
+            <label for="timeEnd" class="form-label">Time End</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="desc" name="desc" placeholder="Description" value="<%= data.desc %>" required>
+            <label for="desc" class="form-label">Description</label>
+          </div>
+          <br>
+          <button type="submit" class="btn btn-danger form-control">Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<%- include('../layouts/footer') %>

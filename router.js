@@ -50,8 +50,8 @@ router.get('/transactionProof/:id', restrict, userActivity.transactionProof)
 // mencocokkan token webinar untuk mendapatkan akses menuju e-certificate
 router.post('/matchTheToken/:id', restrict, userActivity.matchTheToken)
 
-// auto generate e-certificate
-router.get('/certificate', restrict, userActivity.certificate)
+// // auto generate e-certificate
+// router.get('/certificate', restrict, userActivity.certificate)
 
 // menuju halaman profil
 router.get('/profile', restrict, userActivity.profile)
@@ -92,9 +92,6 @@ router.get('/admin/editEvent/:id', adminDashboard.editEventForm)
 
 // memperoses edit data webinar
 router.post('/admin/editEvent/:id', adminDashboard.editEventProcess)
-
-// menghapus data webinar
-router.get('/admin/deleteEvent/:id', adminDashboard.deleteEvent)
 
 // data-data transaksi
 router.get('/admin/transactionData', adminDashboard.transactionData)

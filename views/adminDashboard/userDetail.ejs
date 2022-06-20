@@ -1,0 +1,45 @@
+<%- include('../layouts/header') %>
+
+<%- include('../layouts/adminNavbar') %>
+
+<section class="section mb-5 mt-5">
+  <div class="container">
+    <div class="row text-center">
+      <img src="/assets/img/bg-certif.jpg" class="img-thumbnail mx-auto rounded-circle" alt="" style="width: 15rem; height: 15rem;">
+      <h2 class="text-warning text-center text-uppercase mb-3 mt-3"><%= data.fullName %></h2>
+    </div>
+    <hr class="mb-5 mt-5">
+    <div class="row justify-content-around mb-4">
+      <div class="col-md-2">
+        <p class="fw-bold fs-5 lh-1">EMAIL :</p>
+        <p class="fs-5"><%= data.email %></p>
+      </div>
+      <div class="col-md-2">
+        <p class="fw-bold fs-5 lh-1">USERNAME :</p>
+        <p class="fs-5">&#64;<%= data.username %></p>
+      </div>
+    </div>
+    <div class="row justify-content-around mb-4">
+      <div class="col-md-2">
+        <p class="fw-bold fs-5 lh-1">BIRTHDATE :</p>
+        <p class="fs-5"><%= data.birthDate %></p>
+      </div>
+      <div class="col-md-2">
+        <p class="fw-bold fs-5 lh-1">GENDER :</p>
+        <p class="fs-5"><%= data.gender %></p>
+      </div>
+    </div>
+    <div class="row justify-content-around mb-4">
+      <div class="col-md-2">
+        <p class="fw-bold fs-5 lh-1">DOMICILE :</p>
+        <p class="fs-5"><%= data.domicile %></p>
+      </div>
+      <div class="col-md-2">
+        <p class="fw-bold fs-5 lh-1">PROFESSION :</p>
+        <p class="fs-5"><%= data.profession %></p>
+      </div>
+    </div>   
+  </div>
+</section>
+
+<%- include('../layouts/footer') %>

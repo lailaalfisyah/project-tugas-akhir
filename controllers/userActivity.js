@@ -70,33 +70,24 @@ module.exports = {
         if (req.body.token !== data.Event.token) {
           res.json('Invalid Token!')
         } else {
-          res.redirect('/certificate')
+          const ejs = `<div id="capture" style="padding: 10px; background: #f5da55">
+            <h4 style="color: #000; ">Hello world! ${data.Event.title}</h4>
+          </div>`
+
+          const options = {
+            format: 'A4',
+            orientation: 'landscape'
+          }
+
+          pdf.create(ejs, options).toFile('assets/certificates/mycertif.pdf', (err, data) => {
+            if (err) return console.log(err)
+            // console.log(data)
+
+            let certif = fs.readFileSync(data.filename)
+            res.contentType('application/pdf')
+            res.send(certif)
+          })
         }
-      })
-  },
-
-  certificate: (req, res) => {    
-    Events.findOne({
-      where: { id: 1 }
-    })
-      .then(data => {
-        const ejs = `<div id="capture" style="padding: 10px; background: #f5da55">
-          <h4 style="color: #000; ">Hello world! ${data.title}</h4>
-        </div>`
-
-        const options = {
-          format: 'A4',
-          orientation: 'landscape'
-        }
-
-        // res.render('userActivity/detailEvent', { data })
-        pdf.create(ejs, options).toFile('views/certificates/mycertif.pdf', (err, data) => {
-          if (err) return console.log(err)
-          console.log(data)
-          let certif = fs.readFileSync(data)
-          res.contentType('application/pdf')
-          res.send(certif)
-        })
       })
   },
 
@@ -129,7 +120,6 @@ module.exports = {
 
   editProfileProcess: (req, res) => {
     Users.updateProfile(req.user.id, req.body)
-      // .then(data => res.status(200).json(data))
       .then(() => res.redirect('/profile'))
   }
 }

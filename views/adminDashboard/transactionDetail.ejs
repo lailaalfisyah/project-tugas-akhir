@@ -1,0 +1,59 @@
+<%- include('../layouts/header') %>
+
+<%- include('../layouts/adminNavbar') %>
+
+<section class="section mt-5 mb-5">
+  <div class="container">
+    <div class="row justify-content-center mb-5">
+      <div class="col-md-6">
+        <div class="card mb-3">
+          <div class="card-body">
+            <h6 class="card-title text-center p-1 bg-warning">Transacation ID: <%= data.id %></h6>
+            <h3 class="card-text text-center mt-3 mb-3"><%= data.Event.title %></h3>
+            <table class="table">
+                <tr>
+                  <th>User ID</th>
+                  <td>: <%= data.User.id%></td>
+                </tr>
+                <tr>
+                  <th>Name of Participant</th>
+                  <td>: <%= data.User.fullName%></td>
+                </tr>
+                <tr>
+                  <th>Username</th>
+                  <td>: &#64;<%= data.User.username %> </td>
+                </tr>
+                <tr>
+                  <th>Event ID</th>
+                  <td>: <%= data.Event.id%></td>
+                </tr>
+                <tr>
+                  <th>Token of Event</th>
+                  <td>: <%= data.Event.token%></td>
+                </tr>
+                <tr>
+                  <th>Date of Event</th>
+                  <td>: <%= data.Event.dateStart%></td>
+                </tr>
+                <tr>
+                  <th>Time of Event</th>
+                  <td>: <%= data.Event.timeStart%> - <%= data.Event.timeEnd%></td>
+                </tr>
+                <tr>
+                  <th>Price</th>
+                  <td>: <%= data.Event.price%></td>
+                </tr>
+            </table>
+            <br>
+            <div class="alert alert-warning text-center">
+              <h6>Registered at :</h6>
+              <p><%= data.createdAt %></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<%- include('../layouts/footer') %>

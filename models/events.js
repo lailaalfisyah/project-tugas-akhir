@@ -13,43 +13,22 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
 
-    static inputEvent = (id, { token, title, dateStart, dateEnd, timeStart, timeEnd, price }) => {
+    static inputEvent = (id, { token, title, dateStart, timeStart, timeEnd, price, desc }) => {
       let ds = dateAndTime.transform(dateStart, 'YYYY-MM-DD', 'dddd, DD MMMM YYYY')
-      // let de = dateAndTime.transform(dateEnd, 'YYYY-MM-DD', 'dddd, DD MMMM YYYY')
       let ts = dateAndTime.transform(timeStart, 'HH:mm:ss', 'HH:mm [WIB]')
       let te = dateAndTime.transform(timeEnd, 'HH:mm:ss', 'HH:mm [WIB]')
-
-      // if (!dateEnd) {
-      //   de = ''
-      // }
 
       return this.create({
         id,
         token,
         title,
         dateStart: ds,
-        // dateEnd: de,
         timeStart: ts,
         timeEnd: te,
-        price
+        price,
+        desc
       })
     }
-
-    
-
-    // static matchToken = async ({ token }) => {
-    //   try {
-    //     const isTokenMatch = await this.findOne({
-    //       where: { token }
-    //     })
-  
-    //     if (!isTokenMatch) return Promise.reject('Invalid token!')
-    //     return Promise.resolve('Congratulations! You got the certificate.')
-    //   }
-    //   catch(err) {
-    //     return Promise.reject(err)
-    //   }
-    // }
   };
 
   Events.init({

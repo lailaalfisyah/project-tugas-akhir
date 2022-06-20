@@ -2,10 +2,10 @@
 
 <%- include('../layouts/navbar') %>
 
-<section class="section mb-5">
+<section class="section mb-5 mt-5">
   <div class="container">
     <div class="row text-center">
-      <img src="/assets/img/bg-certif.jpg" class="img-thumbnail mx-auto rounded-circle" alt="" style="width: 15rem; height: 15rem;">
+      <img src="/assets/img/profile-laila.jpg" class="img-thumbnail mx-auto rounded-circle" alt="" style="width: 15rem; height: 15rem;">
       <h2 class="text-warning text-center text-uppercase mb-3 mt-3"><%= user.fullName %></h2>
       <a href="/editProfile">
         <button class="btn btn-danger btn-sm"><i class="fa-solid fa-pen-to-square"></i> Edit Profile</button>
@@ -19,7 +19,7 @@
       </div>
       <div class="col-md-2">
         <p class="fw-bold fs-5 lh-1">USERNAME :</p>
-        <p class="fs-5"><%= user.username %></p>
+        <p class="fs-5">&#64;<%= user.username %></p>
       </div>
     </div>
     <div class="row justify-content-around mb-4">
@@ -46,6 +46,7 @@
     <div class="row text-center">
       <h3 class="text-warning">Transactions History</h3>
     </div>
+    <br>
     <div class="row">
     <% data.forEach(i => { %>
       <div class="col-md-6">
@@ -57,7 +58,8 @@
               </div>
               <div class="col-md-8">
                 <h5 class="card-title"><%= i.Event.title %></h5>
-                <a href="/transactionProof/<%= i.id %>" class="btn btn-danger">Detail</a>
+                <br>
+                <a href="/transactionProof/<%= i.id %>" class="btn btn-danger btn-sm">Detail</a>
               </div>
             </div>
           </div>
