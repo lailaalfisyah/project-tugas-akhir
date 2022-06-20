@@ -1,0 +1,55 @@
+<%- include('../layouts/header') %>
+
+<%- include('../layouts/navbar') %>
+
+<section class="section mt-5 mb-5">
+  <div class="container">
+    <div class="row justify-content-center mb-5">
+      <div class="col-md-6">
+        <h2 class="text-center text-warning">EDIT PROFILE</h2>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-md-4">
+        <img src="/assets/img/bg-certif.jpg" class="img-thumbnail mx-auto rounded-circle" alt="" style="width: 15rem; height: 15rem;">
+      </div>
+      <div class="col-md-4">
+        <form method="POST" action="/editProfile">
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="fullName" name="fullName" value="<%= user.fullName %>" placeholder="Full Name" required>
+            <label for="fullName" class="form-label">Full Name</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="email" name="email" value="<%= user.email %>" placeholder="Email Address" required>
+            <label for="email" class="form-label">Email Address</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="username" name="username" value="<%= user.username %>" placeholder="Username" required>
+            <label for="username" class="form-label">Username</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="domicile" name="domicile" value="<%= user.domicile %>" placeholder="Domicile" required>
+            <label for="domicile" class="form-label">Domicile</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="profession" name="profession" value="<%= user.profession %>" placeholder="Profession" required>
+            <label for="profession" class="form-label">Profession</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="date" class="form-control" id="birthDate" name="birthDate" value="<%= user.birthDate %>" placeholder="Birth Date" required>
+            <label for="birthDate" class="form-label">Birth Date</label>
+          </div>
+          <select class="form-select" name="gender" aria-label="Default select example" required>
+            <option selected value="<%= user.gender %>"><%= user.gender %></option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+          </select>
+          <br>
+          <button type="submit" class="btn btn-danger form-control">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<%- include('../layouts/footer') %>

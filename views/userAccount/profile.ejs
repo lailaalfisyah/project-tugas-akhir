@@ -1,0 +1,71 @@
+<%- include('../layouts/header') %>
+
+<%- include('../layouts/navbar') %>
+
+<section class="section mb-5">
+  <div class="container">
+    <div class="row text-center">
+      <img src="/assets/img/bg-certif.jpg" class="img-thumbnail mx-auto rounded-circle" alt="" style="width: 15rem; height: 15rem;">
+      <h2 class="text-warning text-center text-uppercase mb-3 mt-3"><%= user.fullName %></h2>
+      <a href="/editProfile">
+        <button class="btn btn-danger btn-sm"><i class="fa-solid fa-pen-to-square"></i> Edit Profile</button>
+      </a>
+    </div>
+    <hr class="mb-5 mt-5">
+    <div class="row justify-content-around mb-4">
+      <div class="col-md-2">
+        <p class="fw-bold fs-5 lh-1">EMAIL :</p>
+        <p class="fs-5"><%= user.email %></p>
+      </div>
+      <div class="col-md-2">
+        <p class="fw-bold fs-5 lh-1">USERNAME :</p>
+        <p class="fs-5"><%= user.username %></p>
+      </div>
+    </div>
+    <div class="row justify-content-around mb-4">
+      <div class="col-md-2">
+        <p class="fw-bold fs-5 lh-1">BIRTHDATE :</p>
+        <p class="fs-5"><%= user.birthDate %></p>
+      </div>
+      <div class="col-md-2">
+        <p class="fw-bold fs-5 lh-1">GENDER :</p>
+        <p class="fs-5"><%= user.gender %></p>
+      </div>
+    </div>
+    <div class="row justify-content-around mb-4">
+      <div class="col-md-2">
+        <p class="fw-bold fs-5 lh-1">DOMICILE :</p>
+        <p class="fs-5"><%= user.domicile %></p>
+      </div>
+      <div class="col-md-2">
+        <p class="fw-bold fs-5 lh-1">PROFESSION :</p>
+        <p class="fs-5"><%= user.profession %></p>
+      </div>
+    </div>
+    <hr class="mb-5 mt-5">
+    <div class="row text-center">
+      <h3 class="text-warning">Transactions History</h3>
+    </div>
+    <div class="row">
+    <% data.forEach(i => { %>
+      <div class="col-md-6">
+        <div class="card mb-3">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-4">
+                <img src="/assets/img/bg-certif.jpg" class="card-img-top" alt="poster">
+              </div>
+              <div class="col-md-8">
+                <h5 class="card-title"><%= i.Event.title %></h5>
+                <a href="/transactionProof/<%= i.id %>" class="btn btn-danger">Detail</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% }) %> 
+    </div>     
+  </div>
+</section>
+
+<%- include('../layouts/footer') %>

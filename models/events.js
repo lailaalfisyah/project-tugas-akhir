@@ -13,55 +13,46 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
 
-    static inputEvent = (eventID, { token, title, dateStart, dateEnd, timeStart, timeEnd, price }) => {
+    static inputEvent = (id, { token, title, dateStart, dateEnd, timeStart, timeEnd, price }) => {
       let ds = dateAndTime.transform(dateStart, 'YYYY-MM-DD', 'dddd, DD MMMM YYYY')
-      let de = dateAndTime.transform(dateEnd, 'YYYY-MM-DD', 'dddd, DD MMMM YYYY')
+      // let de = dateAndTime.transform(dateEnd, 'YYYY-MM-DD', 'dddd, DD MMMM YYYY')
       let ts = dateAndTime.transform(timeStart, 'HH:mm:ss', 'HH:mm [WIB]')
       let te = dateAndTime.transform(timeEnd, 'HH:mm:ss', 'HH:mm [WIB]')
 
-      if (!dateEnd) {
-        de = ''
-      }
+      // if (!dateEnd) {
+      //   de = ''
+      // }
 
       return this.create({
-        eventID,
+        id,
         token,
         title,
         dateStart: ds,
-        dateEnd: de,
+        // dateEnd: de,
         timeStart: ts,
         timeEnd: te,
         price
       })
     }
 
-    static matchToken = async ({ token }) => {
-      try {
-        const isTokenMatch = await this.findOne({
-          where: { token }
-        })
-  
-        if (!isTokenMatch) return Promise.reject('Invalid token!')
-        return Promise.resolve('Congratulations! You got the certificate.')
-      }
-      catch(err) {
-        return Promise.reject(err)
-      }
-    }
+    
 
-    static hitung() {
-      return this.count({
-        where: { 
-          dateStart: {
-            [Op.lte]: 2021
-          } 
-        }
-      })
-    }
+    // static matchToken = async ({ token }) => {
+    //   try {
+    //     const isTokenMatch = await this.findOne({
+    //       where: { token }
+    //     })
+  
+    //     if (!isTokenMatch) return Promise.reject('Invalid token!')
+    //     return Promise.resolve('Congratulations! You got the certificate.')
+    //   }
+    //   catch(err) {
+    //     return Promise.reject(err)
+    //   }
+    // }
   };
 
   Events.init({
-    eventID: DataTypes.STRING,
     token: DataTypes.STRING,
     title: DataTypes.STRING,
     dateStart: DataTypes.STRING,

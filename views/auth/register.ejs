@@ -1,45 +1,59 @@
-<div class="container mt-5">
-  <div class="row d-flex justify-content-around">
-      <div class="col-lg-6">
-          <h1 class="text-center">FORM REGISTRASI</h1><br>
-          <form method="POST" action="/register">
-            <!-- Role ID -->
-            <!-- <input type="hidden" id="roleID" name="roleID" value="1"> -->
-            <div class="mb-3">
-              <label for="fullName" class="form-label">Full Name</label>
-              <input type="text" class="form-control" id="fullName" name="fullName">
-            </div>
-            <div class="mb-3">
-              <label for="email" class="form-label">Email</label>
-              <input type="text" class="form-control" id="email" name="email">
-            </div>
-            <div class="mb-3">
-              <label for="username" class="form-label">Username</label>
-              <input type="text" class="form-control" id="username" name="username">
-            </div>
-            <div class="mb-3">
-              <label for="password" class="form-label">Password</label>
-              <input type="password" class="form-control" id="password" name="password">
-            </div>
-            <div class="mb-3">
-              <label for="birthDate" class="form-label">Birth Date</label>
-              <input type="date" class="form-control" id="birthDate" name="birthDate">
-            </div>
-            <div class="mb-3">
-              <label for="gender" class="form-label">Gender</label>
-              <input type="text" class="form-control" id="gender" name="gender">
-            </div>
-            <div class="mb-3">
-              <label for="domicile" class="form-label">Domicile</label>
-              <input type="text" class="form-control" id="domicile" name="domicile">
-            </div>
-            <div class="mb-3">
-              <label for="profession" class="form-label">Profession</label>
-              <input type="text" class="form-control" id="profession" name="profession">
-            </div>
-            <br>
-            <button type="submit" class="btn btn-primary">Submit</button>
-          </form>
-      </div>
+<%- include('../layouts/header') %>
+
+<section class="section bg-warning">
+  <div class="container pt-5 pb-5">
+    <div class="row d-flex justify-content-around">
+        <div class="col-md-6">
+            <h1 class="text-center">REGISTRATION FORM</h1><br>
+            <form method="POST" action="/register">
+              <!-- Role ID -->
+              <!-- <input type="hidden" id="roleID" name="roleID" value="1"> -->
+              <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="fullName" name="fullName" placeholder="Full Name" required>
+                <label for="fullName">Full Name</label>
+              </div>
+              <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="email" name="email" placeholder="Full Name" required>
+                <label for="fullName">Email Address</label>
+              </div>
+              <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="username" name="username" placeholder="Username" required>
+                <label for="fullName">Username</label>
+              </div>
+              <div class="form-floating mb-3">
+                <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+                <label for="fullName">Password</label>
+              </div>
+              <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="domicile" name="domicile" placeholder="Domicile" required>
+                <label for="fullName">Domicile City</label>
+              </div>
+              <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="profession" name="profession" placeholder="Profession" required>
+                <label for="fullName">Profession</label>
+              </div>
+              <div class="form-floating mb-3">
+                <input type="date" class="form-control" id="birthDate" name="birthDate" placeholder="Birth Date" required>
+                <label for="fullName">Birth Date</label>
+              </div>
+              <select class="form-select" aria-label="Default select example" required>
+                <option selected>Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+              </select>
+              <br>
+              <button type="submit" class="btn btn-dark form-control">SUBMIT</button>
+            </form>
+            <hr>
+            <p class="text-dark text-center">Already have an account? <a href="/login" class="text-reset fw-bold">Click to login!</a></p>
+        </div>
+    </div>
   </div>
-</div>
+</section>
+
+<script src="assets/js/script.js"></script>
+<script src="assets/js/jquery.js"></script> 
+<script src="assets/js/popper.js"></script> 
+<script src="assets/js/bootstrap.js"></script>	
+</body>
+</html>

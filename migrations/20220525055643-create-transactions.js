@@ -2,7 +2,7 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('Transactions', {
-      transID: {
+      id: {
         allowNull: false,
         autoIncrement: false,
         primaryKey: true,
@@ -13,7 +13,7 @@ module.exports = {
         type: Sequelize.STRING,
         references: {
           model: 'Users',
-          key: 'userID'
+          key: 'id'
         }
       },
       eventID: {
@@ -21,7 +21,7 @@ module.exports = {
         type: Sequelize.STRING,
         references: {
           model: 'Events',
-          key: 'eventID'
+          key: 'id'
         }
       },
       createdAt: {

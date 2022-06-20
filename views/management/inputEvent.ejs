@@ -1,39 +1,50 @@
-<div class="container mt-5">
-  <div class="row d-flex justify-content-around">
-      <div class="col-lg-6">
-          <h1 class="text-center">FORM REGISTRASI</h1><br>
-          <form method="POST" action="/inputEvent">
-            <div class="mb-3">
-              <label for="token" class="form-label">Token</label>
-              <input type="text" class="form-control" id="token" name="token">
-            </div>
-            <div class="mb-3">
-              <label for="title" class="form-label">Title</label>
-              <input type="text" class="form-control" id="title" name="title">
-            </div>
-            <div class="mb-3">
-              <label for="dateStart" class="form-label">Date Start</label>
-              <input type="date" class="form-control" id="dateStart" name="dateStart">
-            </div>
-            <div class="mb-3">
-              <label for="dateEnd" class="form-label">Date End</label>
-              <input type="date" class="form-control" id="dateEnd" name="dateEnd">
-            </div>
-            <div class="mb-3">
-              <label for="timeStart" class="form-label">Time Start</label>
-              <input type="time" class="form-control" id="timeStart" name="timeStart">
-            </div>
-            <div class="mb-3">
-              <label for="timeEnd" class="form-label">Time End</label>
-              <input type="time" class="form-control" id="timeEnd" name="timeEnd">
-            </div>
-            <div class="mb-3">
-              <label for="price" class="form-label">Price</label>
-              <input type="text" class="form-control" id="price" name="price">
-            </div>
-            <br>
-            <button type="submit" class="btn btn-primary">Submit</button>
-          </form>
+<%- include('../layouts/header') %>
+
+<%- include('../layouts/adminNavbar') %>
+
+<section class="section mt-5 mb-5">
+  <div class="container">
+    <div class="row justify-content-center mb-5">
+      <div class="col-md-6">
+        <h2 class="text-center text-warning">INPUT EVENT</h2>
       </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-md-4">
+        <img src="/assets/img/bg-certif.jpg" class="img-thumbnail mx-auto rounded-circle" alt="" style="width: 15rem; height: 15rem;">
+      </div>
+      <div class="col-md-4">
+        <form method="POST" action="/inputEvent">
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="token" name="token" placeholder="Full Name" required>
+            <label for="token" class="form-label">Token</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="title" name="title" placeholder="Full Name" required>
+            <label for="title" class="form-label">Title</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="date" class="form-control" id="dateStart" name="dateStart" placeholder="Full Name" required>
+            <label for="dateStart" class="form-label">Date</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="time" class="form-control" id="timeStart" name="timeStart" placeholder="Full Name" required>
+            <label for="timeStart" class="form-label">Time Start</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="time" class="form-control" id="timeEnd" name="timeEnd" placeholder="Full Name" required>
+            <label for="timeEnd" class="form-label">Time End</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="desc" name="desc" placeholder="Full Name" required>
+            <label for="desc" class="form-label">Description</label>
+          </div>
+          <br>
+          <button type="submit" class="btn btn-danger form-control">Submit</button>
+        </form>
+      </div>
+    </div>
   </div>
-</div>
+</section>
+
+<%- include('../layouts/footer') %>

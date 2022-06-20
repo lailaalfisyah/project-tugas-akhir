@@ -2,7 +2,7 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('Certificates', {
-      certifID: {
+      id: {
         allowNull: false,
         autoIncrement: false,
         primaryKey: true,
@@ -13,7 +13,7 @@ module.exports = {
         type: Sequelize.STRING,
         references: {
           model: 'Transactions',
-          key: 'transID'
+          key: 'id'
         }
       },
       file: {

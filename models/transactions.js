@@ -18,7 +18,6 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Transactions.init({
-    transID: DataTypes.STRING,
     userID: DataTypes.STRING,
     eventID: DataTypes.STRING
   }, {
