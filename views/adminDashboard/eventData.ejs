@@ -19,17 +19,17 @@
                   </tr>
                 </thead>                
                 <tbody>
-                <% data.forEach(i => { %>
-                  <tr class="text-center">
-                    <td><%= i.id %></td>
-                    <td><%= i.token %></td>
-                    <td><%= i.title%></td>
-                    <td><%= i.dateStart %></td>
-                    <td>
-                      <a href="/admin/eventData/<%= i.id %> " class="btn btn-danger btn-sm">Detail</a>
-                    </td>
-                  </tr>
-                <% }) %>
+                  <% for (let i = 0; i < data.length; i++) { %>
+                    <tr class="text-center">
+                      <td><%= data[i].id %></td>
+                      <td><%= data[i].token %></td>
+                      <td><%= data[i].title %></td>
+                      <td><%= convertedDate[i] %></td>
+                      <td>
+                        <a href="/admin/eventData/<%= data[i].id %> " class="btn btn-danger btn-sm">Detail</a>
+                      </td>
+                    </tr>
+                  <% } %>
                 </tbody>
             </table>
         </div>

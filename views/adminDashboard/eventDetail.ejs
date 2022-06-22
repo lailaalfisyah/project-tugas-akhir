@@ -12,8 +12,8 @@
         <h3 class="card-title text-warning"><%= data.title %></h3>
         <h5 class="card-title text-dark">Token: <%= data.token %></h5>
         <br><br>
-        <h5 class="card-subtitle mb-2 text-muted"><i class="fa-solid fa-calendar-days"></i> <%= data.dateStart %></h5>
-        <h5 class="card-subtitle mb-2 text-muted"><i class="fa-solid fa-clock"></i> <%= data.timeStart %> - <%= data.timeEnd %></h5>
+        <h5 class="card-subtitle mb-2 text-muted"><i class="fa-solid fa-calendar-days"></i> <%= convertedDate %></h5>
+        <h5 class="card-subtitle mb-2 text-muted"><i class="fa-solid fa-clock"></i> <%= convertedTimeStart %> - <%= convertedTimeEnd %></h5>
         <br><br>
         <a href="/admin/editEvent/<%= data.id %>" class="btn btn-danger">
           <i class="fa-solid fa-pen-to-square"></i> Edit

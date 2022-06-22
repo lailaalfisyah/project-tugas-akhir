@@ -1,4 +1,5 @@
 const { Events, Transactions, Users, General } = require('../models')
+const dateAndTime = require('date-and-time')
 const pdf = require('html-pdf')
 const fs = require('fs')
 
@@ -13,9 +14,11 @@ module.exports = {
 
   userData: (req, res) => {
     Users.findAll()
-      .then(data => res.render('adminDashboard/userData', {
-        data
-      }))
+      .then(data => {
+        res.render('adminDashboard/userData', {
+          data
+        })
+      })
   },
 
   userDetail: (req, res) => {
@@ -23,15 +26,35 @@ module.exports = {
       where: { id: req.params.id }
     })
       .then(data => res.render('adminDashboard/userDetail', {
-        data
+        data,
+        convertedDate: dateAndTime.transform(data.birthDate, 'YYYY-MM-DD', 'DD MMMM YYYY')
       }))
   },
 
   eventData: (req, res) => {
     Events.findAll()
-      .then(data => res.render('adminDashboard/eventData', {
-        data
-      }))
+      .then(data => {
+        let convertedDate = []
+        let convertedTimeStart = []
+        let convertedTimeEnd = []
+
+        data.forEach(i => {
+          convertDate = dateAndTime.transform(i.date, 'YYYY-MM-DD', 'dddd, DD MMMM YYYY')
+          convertTimeStart = dateAndTime.transform(i.timeStart, 'HH:mm:ss', 'HH.mm [WIB]')
+          convertTimeEnd = dateAndTime.transform(i.timeEnd, 'HH:mm:ss', 'HH.mm [WIB]')
+
+          convertedDate.push(convertDate)
+          convertedTimeStart.push(convertTimeStart)
+          convertedTimeEnd.push(convertTimeEnd)
+        })
+
+        res.render('adminDashboard/eventData', {
+          data,
+          convertedDate,
+          convertedTimeStart,
+          convertedTimeEnd
+        })
+      })       
   },
 
   eventDetail: (req, res) => {
@@ -39,7 +62,10 @@ module.exports = {
       where: { id: req.params.id }
     })
       .then(data => res.render('adminDashboard/eventDetail', {
-        data
+        data,
+        convertedDate: dateAndTime.transform(data.date, 'YYYY-MM-DD', 'dddd, DD MMMM YYYY'),
+        convertedTimeStart: dateAndTime.transform(data.timeStart, 'HH:mm:ss', 'HH.mm [WIB]'),
+        convertedTimeEnd: dateAndTime.transform(data.timeEnd, 'HH:mm:ss', 'HH.mm [WIB]')
       }))
   },
 
@@ -65,7 +91,7 @@ module.exports = {
   },
 
   editEventProcess: (req, res) => {
-    Events.updateEvent(req.body)
+    Events.updateEvent(req.params.id, req.body)
       .then(() => res.redirect('/admin/eventData'))
   },
 
@@ -82,10 +108,12 @@ module.exports = {
         ['id', 'DESC']
       ]
     })
-      .then(data => res.render('adminDashboard/transactionData', {
-        data, 
-        // user: req.user.dataValues
-      }))
+      .then(data => {
+        res.render('adminDashboard/transactionData', {
+          data
+          // user: req.user.dataValues
+        })
+      })
   },
 
   transactionDetail: (req, res) => {
@@ -101,6 +129,9 @@ module.exports = {
     })
       .then(data => res.render('adminDashboard/transactionDetail', {
         data, 
+        convertedEventDate: dateAndTime.transform(data.Event.date, 'YYYY-MM-DD', 'dddd, DD MMMM YYYY'),
+        convertedTimeStart: dateAndTime.transform(data.Event.timeStart, 'HH:mm:ss', 'HH.mm [WIB]'),
+        convertedTimeEnd: dateAndTime.transform(data.Event.timeEnd, 'HH:mm:ss', 'HH.mm [WIB]')
         // user: req.user.dataValues
       }))
   },

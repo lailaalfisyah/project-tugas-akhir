@@ -13,11 +13,11 @@
             <table class="table">
                 <tr>
                   <th>User ID</th>
-                  <td>: <%= data.User.id%></td>
+                  <td>: <%= data.User.id %></td>
                 </tr>
                 <tr>
                   <th>Name of Participant</th>
-                  <td>: <%= data.User.fullName%></td>
+                  <td>: <%= data.User.fullName %></td>
                 </tr>
                 <tr>
                   <th>Username</th>
@@ -25,19 +25,19 @@
                 </tr>
                 <tr>
                   <th>Event ID</th>
-                  <td>: <%= data.Event.id%></td>
+                  <td>: <%= data.Event.id %></td>
                 </tr>
                 <tr>
                   <th>Token of Event</th>
-                  <td>: <%= data.Event.token%></td>
+                  <td>: <%= data.Event.token %></td>
                 </tr>
                 <tr>
                   <th>Date of Event</th>
-                  <td>: <%= data.Event.dateStart%></td>
+                  <td>: <%= convertedEventDate %></td>
                 </tr>
                 <tr>
                   <th>Time of Event</th>
-                  <td>: <%= data.Event.timeStart%> - <%= data.Event.timeEnd%></td>
+                  <td>: <%= convertedTimeStart %> - <%= convertedTimeEnd %></td>
                 </tr>
             </table>
             <br>

@@ -9,14 +9,14 @@
         <h2 class="text-center text-warning">EDIT EVENT</h2>
       </div>
     </div>
-    <form method="POST" action="/editEvent/<%= data.id %>">
+    <form method="POST" action="/admin/editEvent/<%= data.id %>">
       <div class="row justify-content-center">
         <div class="col-md-4">
           <img src="/assets/img/webinar2.jpg" alt="" class="img-thumbnail mx-auto" alt="">
           <br><br>
           <div class="mb-3">
             <label for="poster" class="form-label">Change the poster event here!</label>
-            <input type="file" class="form-control" id="poster" name="poster" required>
+            <input type="file" class="form-control" id="poster" name="poster">
           </div>
         </div>
         <div class="col-md-4 offset-md-1">
@@ -29,8 +29,8 @@
             <label for="title" class="form-label">Title</label>
           </div>
           <div class="form-floating mb-3">
-            <input type="date" class="form-control" id="dateStart" name="dateStart" placeholder="Date" value="<%= data.dateStart %>" required>
-            <label for="dateStart" class="form-label">Date</label>
+            <input type="date" class="form-control" id="date" name="date" placeholder="Date" value="<%= data.date %>" required>
+            <label for="date" class="form-label">Date</label>
           </div>
           <div class="form-floating mb-3">
             <input type="time" class="form-control" id="timeStart" name="timeStart" placeholder="Time Start" value="<%= data.timeStart %>" required>

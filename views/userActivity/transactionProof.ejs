@@ -13,15 +13,15 @@
             <table class="table">
                 <tr>
                   <th>Name of Participant</th>
-                  <td>: <%= data.User.fullName%></td>
+                  <td>: <%= data.User.fullName %></td>
                 </tr>
                 <tr>
                   <th>Date of Event</th>
-                  <td>: <%= data.Event.dateStart%></td>
+                  <td>: <%= convertedEventDate %></td>
                 </tr>
                 <tr>
                   <th>Time of Event</th>
-                  <td>: <%= data.Event.timeStart%> - <%= data.Event.timeEnd%></td>
+                  <td>: <%= convertedTimeStart %> - <%= convertedTimeEnd %></td>
                 </tr>
             </table>
             <br>

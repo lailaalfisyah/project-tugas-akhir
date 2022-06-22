@@ -16,20 +16,14 @@ module.exports = {
       title: {
         type: Sequelize.STRING
       },
-      dateStart: {
-        type: Sequelize.STRING
-      },
-      dateEnd: {
-        type: Sequelize.STRING
+      date: {
+        type: Sequelize.DATEONLY
       },
       timeStart: {
-        type: Sequelize.STRING
+        type: Sequelize.TIME
       },
       timeEnd: {
-        type: Sequelize.STRING
-      },
-      price: {
-        type: Sequelize.INTEGER
+        type: Sequelize.TIME
       },
       desc: {
         type: Sequelize.TEXT

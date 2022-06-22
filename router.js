@@ -106,7 +106,8 @@ router.get('/admin/transactionReport', adminDashboard.transactionReport)
 
 // LAIN-LAIN (trial & error)
 
-// router.get('/openCertif', coba.openCertif)
-// router.get('/click', coba.click)
+router.get('/convertDateTime', coba.convertDateTime)
+router.get('/convertDatesTimes', coba.convertDatesTimes)
+router.get('/doubleForLoop', coba.doubleForLoop)
 
 module.exports = router

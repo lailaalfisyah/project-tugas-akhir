@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
   
   Certificates.init({
     transID: DataTypes.STRING,
-    file: DataTypes.BLOB
+    file: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Certificates',
