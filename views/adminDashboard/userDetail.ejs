@@ -5,8 +5,10 @@
 <section class="section mb-5 mt-5">
   <div class="container">
     <div class="row text-center">
-      <img src="/assets/img/profile-laila.jpg" class="img-thumbnail mx-auto rounded-circle" alt="" style="width: 15rem; height: 15rem;">
-      <h2 class="text-warning text-center text-uppercase mb-3 mt-3"><%= data.fullName %></h2>
+      <div class="col-md-4 mx-auto">
+        <img src="/assets/img/profilePicture/<%= user.profilePicture %>" class="img-thumbnail mx-auto rounded-circle" alt="" style="width: 15rem; height: 15rem;">
+        <h2 class="text-warning text-center text-uppercase mb-3 mt-3"><%= data.fullName %></h2>
+      </div>
     </div>
     <hr class="mb-5 mt-5">
     <div class="row justify-content-around mb-4">

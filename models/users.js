@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
     static #encrypt = password => bcrypt.hashSync(password, 10)
 
     // memproses registrasi
-    static register = (id, { fullName, email, username, password, birthDate, gender, domicile, profession }, roleID = 2) => {
+    static register = (id, { fullName, email, username, password, birthDate, gender, domicile, profession }, roleID) => {
       const encryptedPassword = this.#encrypt(password)
       return this.create({
         id,
@@ -68,6 +68,16 @@ module.exports = (sequelize, DataTypes) => {
         }
       })
     }
+
+    static updateProfilePicture = (id, filename) => {
+      return this.update({
+        profilePicture: filename
+      }, {
+        where: {
+          id
+        }
+      })
+    }
   };
 
   Users.init({
@@ -79,7 +89,8 @@ module.exports = (sequelize, DataTypes) => {
     birthDate: DataTypes.DATEONLY,
     gender: DataTypes.STRING,
     domicile: DataTypes.STRING,
-    profession: DataTypes.STRING
+    profession: DataTypes.STRING,
+    profilePicture: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Users',

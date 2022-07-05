@@ -1,4 +1,5 @@
 const { Events, Transactions, Users, General } = require('../models')
+const dateAndTime = require('date-and-time')
 const pdf = require('html-pdf')
 const fs = require('fs')
 
@@ -149,5 +150,10 @@ module.exports = {
   editProfileProcess: (req, res) => {
     Users.updateProfile(req.user.id, req.body)
       .then(() => res.redirect('/profile'))
+  },
+
+  editProfilePicture: (req, res) => {
+    Users.updateProfilePicture(req.user.id, req.file.filename)
+      .then(() => res.redirect('/editProfile'))
   }
 }

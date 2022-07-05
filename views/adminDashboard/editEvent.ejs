@@ -9,17 +9,20 @@
         <h2 class="text-center text-warning">EDIT EVENT</h2>
       </div>
     </div>
-    <form method="POST" action="/admin/editEvent/<%= data.id %>">
-      <div class="row justify-content-center">
-        <div class="col-md-4">
-          <img src="/assets/img/webinar2.jpg" alt="" class="img-thumbnail mx-auto" alt="">
+    <div class="row justify-content-center">
+      <div class="col-md-4">
+        <form method="POST" action="/admin/editEventPoster/<%= data.id %>" enctype="multipart/form-data">
+          <img src="/assets/img/eventPoster/<%= data.poster %>" alt="" class="img-thumbnail mx-auto" alt="">
           <br><br>
           <div class="mb-3">
             <label for="poster" class="form-label">Change the poster event here!</label>
             <input type="file" class="form-control" id="poster" name="poster">
           </div>
-        </div>
-        <div class="col-md-4 offset-md-1">
+          <button type="submit" class="btn btn-sm btn-dark form-control">Change Poster</button>
+        </form>
+      </div>
+      <div class="col-md-4 offset-md-1">
+        <form method="POST" action="/admin/editEvent/<%= data.id %>">
           <div class="form-floating mb-3">
             <input type="text" class="form-control" id="token" name="token" placeholder="Token" value="<%= data.token %>" required>
             <label for="token" class="form-label">Token</label>
@@ -46,8 +49,8 @@
           </div>
           <br>
           <button type="submit" class="btn btn-danger form-control">Submit</button>
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
   </div>
 </section>

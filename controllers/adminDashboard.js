@@ -76,7 +76,7 @@ module.exports = {
   inputEventProcess: (req, res) => {
     General.customID('E', Events)
       .then(customizedID => {
-        Events.inputEvent(customizedID, req.body)
+        Events.inputEvent(customizedID, req.body, req.file.filename)
           .then(() => res.redirect('/admin/eventData'))
       })
   },
@@ -92,6 +92,11 @@ module.exports = {
 
   editEventProcess: (req, res) => {
     Events.updateEvent(req.params.id, req.body)
+      .then(() => res.redirect('/admin/eventData'))
+  },
+
+  editEventPoster: (req, res) => {
+    Events.updateEventPoster(req.params.id, req.file.filename)
       .then(() => res.redirect('/admin/eventData'))
   },
 

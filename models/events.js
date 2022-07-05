@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
 
-    static inputEvent = (id, { token, title, date, timeStart, timeEnd, desc }) => {
+    static inputEvent = (id, { token, title, date, timeStart, timeEnd, desc }, filename) => {
       return this.create({
         id,
         token,
@@ -21,7 +21,8 @@ module.exports = (sequelize, DataTypes) => {
         date,
         timeStart,
         timeEnd,
-        desc
+        desc,
+        poster: filename
       })
     }
 
@@ -39,9 +40,20 @@ module.exports = (sequelize, DataTypes) => {
         }
       })
     }
+
+    static updateEventPoster = (id, filename) => {
+      return this.update({
+        poster: filename
+      }, {
+        where: {
+          id
+        }
+      })
+    }
   };
 
   Events.init({
+    poster: DataTypes.STRING,
     token: DataTypes.STRING,
     title: DataTypes.STRING,
     date: DataTypes.DATEONLY,

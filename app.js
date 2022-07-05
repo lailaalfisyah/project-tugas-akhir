@@ -17,7 +17,10 @@ const session = require('express-session')
 app.use(session({
   secret: 'Web Speak Up Now sebagai TA Laila',
   resave: false,
-  saveUninitialized: false
+  saveUninitialized: false,
+  // cookie: {
+  //   expires: 60000
+  // }
 }))
 
 // passport

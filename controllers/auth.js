@@ -9,8 +9,7 @@ module.exports = {
   registerProcess: (req, res, next) => {
     General.customID('U', Users)
       .then(customizedID => {
-        Users.register(customizedID, req.body, req.body.roleID)
-          // .then(data => res.status(200).json(data))
+        Users.register(customizedID, req.body, 2)
           .then(() => res.redirect('/login'))
           .catch(err => next(err))
       })    
@@ -21,10 +20,20 @@ module.exports = {
   },
 
   loginProcess: passport.authenticate('local', {
-    successRedirect: '/event',
+    successRedirect: '/roleDetector',
     failureRedirect: '/login',
     failureFlash: true
   }),
+
+  roleDetector: (req, res) => {
+    if (req.user.roleID == 1) {
+      res.redirect('/admin')
+    }
+
+    if (req.user.roleID == 2) {
+      res.redirect('/event')
+    }
+  },
 
   logoutProcess: (req, res) => {
     if (req.session) {
@@ -47,5 +56,14 @@ module.exports = {
       desc: req.body.desc
     })
       .then(data => res.status(200).json(data))
+  },
+
+  registerAdmin: (req, res, next) => {
+    General.customID('U', Users)
+      .then(customizedID => {
+        Users.register(customizedID, req.body, 1)
+          .then(() => res.redirect('/login'))
+          .catch(err => next(err))
+      })    
   }
 }

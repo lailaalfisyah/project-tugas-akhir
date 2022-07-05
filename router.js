@@ -1,6 +1,9 @@
 const express = require('express')
 const router = express.Router()
 const restrict = require('./middlewares/restrict')
+const multer = require('multer')
+const uploadProfilePicture = multer({ dest: __dirname + '/public/assets/img/profilePicture' })
+const uploadEventPoster = multer({ dest: __dirname + '/public/assets/img/eventPoster' })
 const auth = require('./controllers/auth')
 const adminDashboard = require('./controllers/adminDashboard')
 const userActivity = require('./controllers/userActivity')
@@ -22,11 +25,17 @@ router.get('/login', auth.loginForm)
 // memproses login
 router.post('/login', auth.loginProcess)
 
+// mendeteksi role pengguna
+router.get('/roleDetector', auth.roleDetector)
+
 // memproses logout
 router.get('/logout', auth.logoutProcess)
 
 // menginput keterangan role user (JUST DEMO)
 router.post('/role', auth.inputRole)
+
+// registrasi akun admin (JUST DEMO)
+router.post('/registerAdmin', auth.registerAdmin)
 
 
 
@@ -60,7 +69,10 @@ router.get('/profile', restrict, userActivity.profile)
 router.get('/editProfile', restrict, userActivity.editProfileForm)
 
 // memproses edit profil
-router.post('/editProfile', restrict, userActivity.editProfileProcess)
+router.post('/editProfile', restrict, uploadProfilePicture.single('profilePicture'), userActivity.editProfileProcess)
+
+// memproses edit foto profil
+router.post('/editProfilePicture', restrict, uploadProfilePicture.single('profilePicture'), userActivity.editProfilePicture)
 
 
 
@@ -85,13 +97,16 @@ router.get('/admin/eventData/:id', adminDashboard.eventDetail)
 router.get('/admin/inputEvent', adminDashboard.inputEventForm)
 
 // memproses data webinar yang di-input
-router.post('/admin/inputEvent', adminDashboard.inputEventProcess)
+router.post('/admin/inputEvent', uploadEventPoster.single('poster'), adminDashboard.inputEventProcess)
 
 // menuju form edit data webinar
 router.get('/admin/editEvent/:id', adminDashboard.editEventForm)
 
 // memperoses edit data webinar
 router.post('/admin/editEvent/:id', adminDashboard.editEventProcess)
+
+// memproses edit poster webinar
+router.post('/admin/editEventPoster/:id', uploadEventPoster.single('poster'), adminDashboard.editEventPoster)
 
 // data-data transaksi
 router.get('/admin/transactionData', adminDashboard.transactionData)
@@ -106,8 +121,8 @@ router.get('/admin/transactionReport', adminDashboard.transactionReport)
 
 // LAIN-LAIN (trial & error)
 
-router.get('/convertDateTime', coba.convertDateTime)
-router.get('/convertDatesTimes', coba.convertDatesTimes)
-router.get('/doubleForLoop', coba.doubleForLoop)
+router.get('/countDate', coba.countDate)
+// router.get('/convertDatesTimes', coba.convertDatesTimes)
+// router.get('/doubleForLoop', coba.doubleForLoop)
 
 module.exports = router
