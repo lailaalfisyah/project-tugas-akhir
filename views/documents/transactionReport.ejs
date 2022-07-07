@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Transaction Report</title>
+  <style>
+    table, th, td {
+      border: 1px solid grey;
+      border-collapse: collapse;
+      padding: 5px
+    }
+
+    th {
+      background-color: lightgoldenrodyellow;
+    }
+
+    .text-center {
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <h1 class="text-center">TRANSACTION REPORT</h1><br>
+  <table>
+    <thead>
+      <tr class="text-center">
+        <th>Transactions ID</th>
+        <th>Name of Participant</th>
+        <th>Title of Event</th>
+        <th>Transaction is made on ...</th>
+      </tr>
+    </thead>                
+    <tbody>
+      {{#data}}
+      <tr class="text-center">
+        <td>{{id}}</td>
+        <td>{{User.fullName}}</td>
+        <td>{{Event.title}}</td>
+        <td>{{createdAt}}</td>
+      </tr>
+      {{/data}}
+    </tbody>
+  </table>
+  <br><br>
+  <p>NOTE: This data is taken from the last 15 transactions made.</p>
+</body>
+</html>

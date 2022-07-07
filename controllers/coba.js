@@ -10,5 +10,9 @@ module.exports = {
     console.log(now)
     console.log(date)
     res.end()
+  },
+
+  printImg: (req, res) => {
+    res.render('documents/certificate')
   }
 }

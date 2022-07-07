@@ -122,7 +122,7 @@ router.get('/admin/transactionReport', adminDashboard.transactionReport)
 // LAIN-LAIN (trial & error)
 
 router.get('/countDate', coba.countDate)
-// router.get('/convertDatesTimes', coba.convertDatesTimes)
+router.get('/printImg', coba.printImg)
 // router.get('/doubleForLoop', coba.doubleForLoop)
 
 module.exports = router

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>E-Certificate</title>
+  <style>
+    .background {
+      height: 205mm;
+      background-image: url('https://i.postimg.cc/fyKC4ZWT/bg-certif.jpg');
+      background-size: auto;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+    .contents {
+      text-align: center;
+      padding: 50px 100px;
+    }
+    
+    .description {
+      padding: 0 100px;
+    }
+
+    .near {
+      margin: -15px 0;
+    }
+
+    .name {
+      font-size: 40px;
+      text-transform: uppercase;
+      border-top: 1px solid grey;
+      border-bottom: 1px solid grey;
+      padding: 20px;
+    }
+
+    .signature {
+      width: 150px;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .text {
+      font-size: 20px;
+    }
+
+    .yellow {
+      color: #ffc107;
+    }
+  </style>
+</head>
+<body class="background">
+  <div class="contents">
+    <h1 class="yellow">CERTIFICATE OF PARTICIPATION</h1>
+    <h3>{{data.userID}}&sol;{{data.id}}</h3>
+    <br>
+    <p class="text">This certificate is proudly present to:</p>
+    <!-- <h1 class="name">{{User.fullName}}</h1> -->
+    <h1 class="name">{{data.User.fullName}}</h1>
+    <p class="text description">Has successfully participated in webinar <b>{{data.Event.title}}</b> held on <b>{{convertedEventDate}}</b></p>
+    <br>
+    <p class="text">This activity was awarded by:</p>
+    <img src="https://i.postimg.cc/MTvT1mN6/IMG-20220707-121255.jpg" class="signature" alt="signature">
+    <p class="text"><b>LAILA ALFI SYAH</b></p>
+    <p class="text near">&lbbrk;Founder of Free Webinar&rbbrk;</p>
+  </div>
+</body>
+</html>

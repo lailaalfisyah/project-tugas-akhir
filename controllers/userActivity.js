@@ -2,6 +2,8 @@ const { Events, Transactions, Users, General } = require('../models')
 const dateAndTime = require('date-and-time')
 const pdf = require('html-pdf')
 const fs = require('fs')
+const Mustache = require('mustache')
+const path = require('path')
 
 module.exports = {
   // home: (req, res) => {
@@ -96,19 +98,21 @@ module.exports = {
         if (req.body.token !== data.Event.token) {
           res.json('Invalid Token!')
         } else {
-          const ejs = `<div id="capture" style="padding: 10px; background: #f5da55">
-            <h4 style="color: #000; ">Hello world! ${data.Event.title}</h4>
-          </div>`
+          let ejs = fs.readFileSync('views/documents/certificate.ejs', 'utf-8')
+          let output = Mustache.render(ejs, {
+            data,
+            convertedEventDate: dateAndTime.transform(data.Event.date, 'YYYY-MM-DD', 'dddd, DD MMMM YYYY')
+          })
 
           const options = {
             format: 'A4',
             orientation: 'landscape'
           }
 
-          pdf.create(ejs, options).toFile('assets/certificates/mycertif.pdf', (err, data) => {
-            if (err) return console.log(err)
-            // console.log(data)
+          // console.log(img)
 
+          pdf.create(output, options).toFile('public/assets/documents/certificate.pdf', (err, data) => {
+            if (err) return console.log(err)
             let certif = fs.readFileSync(data.filename)
             res.contentType('application/pdf')
             res.send(certif)

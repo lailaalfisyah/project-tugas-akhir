@@ -2,6 +2,7 @@ const { Events, Transactions, Users, General } = require('../models')
 const dateAndTime = require('date-and-time')
 const pdf = require('html-pdf')
 const fs = require('fs')
+const Mustache = require('mustache')
 
 module.exports = {
   dashboard: (req, res) => {
@@ -149,24 +150,24 @@ module.exports = {
       }, {
         model: Users,
         required: true
-      }]
+      }],
+      order: [
+        ['id', 'DESC']
+      ],
+      limit: 15
     })
       .then(data => {
-        let ejs = '<div id="capture" style="padding: 10px; background: #f5da55">'
-        data.forEach(i => {
-          ejs += '<h4 style="color: #000; ">Hello world! ' + i.Event.title + '</h4>'
-        })
-        ejs += '</div>'
+        let ejs = fs.readFileSync('views/documents/transactionReport.ejs', 'utf-8')
+        let output = Mustache.render(ejs, { data })
 
         const options = {
           format: 'A4',
           orientation: 'potrait'
         }
 
-        pdf.create(ejs, options).toFile('views/coba/hasilcertif7.pdf', (err, data) => {
+        pdf.create(output, options).toFile('assets/documents/transactionReport.pdf', (err, data) => {
           if (err) return console.log(err)
-          console.log(data)
-          let report = fs.readFileSync(data)
+          let report = fs.readFileSync(data.filename)
           res.contentType('application/pdf')
           res.send(report)
         })
