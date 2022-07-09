@@ -107,8 +107,6 @@ module.exports = {
             orientation: 'landscape'
           }
 
-          // console.log(img)
-
           pdf.create(output, options).toFile('public/assets/documents/certificate.pdf', (err, data) => {
             if (err) return console.log(err)
             let certif = fs.readFileSync(data.filename)
