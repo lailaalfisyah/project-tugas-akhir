@@ -35,6 +35,19 @@ module.exports = {
     }
   },
 
+  changePasswordForm: (req, res) => {
+    res.render('auth/changePassword')
+  },
+
+  changePasswordProses: (req, res, next) => {
+    Users.changePassword(req.user, req.body)
+      .then(() => res.redirect('/login'))
+      .catch(err => {
+        req.flash('error', err)
+        res.redirect('/changePassword')
+      })
+  },
+
   logoutProcess: (req, res) => {
     if (req.session) {
       req.session.destroy(err => {

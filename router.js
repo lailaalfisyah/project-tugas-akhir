@@ -31,6 +31,12 @@ router.get('/roleDetector', auth.roleDetector)
 // memproses logout
 router.get('/logout', auth.logoutProcess)
 
+// menuju form ubah password
+router.get('/changePassword', restrict, auth.changePasswordForm)
+
+// memproses ubah password
+router.post('/changePassword', restrict, auth.changePasswordProses)
+
 // menginput keterangan role user (JUST DEMO)
 router.post('/role', auth.inputRole)
 
@@ -79,50 +85,54 @@ router.post('/editProfilePicture', restrict, uploadProfilePicture.single('profil
 // ADMIN DASHBOARD
 
 // menuju dasbor admin
-router.get('/admin', adminDashboard.dashboard)
+router.get('/admin', restrict, adminDashboard.dashboard)
 
 // data-data pengguna
-router.get('/admin/userData', adminDashboard.userData)
+router.get('/admin/userData', restrict, adminDashboard.userData)
 
 // detail data pengguna
-router.get('/admin/userData/:id', adminDashboard.userDetail)
+router.get('/admin/userData/:id', restrict, adminDashboard.userDetail)
+
+// mencari data pengguna
+router.get('/admin/searchUser', restrict, adminDashboard.searchUser)
 
 // data-data webinar
-router.get('/admin/eventData', adminDashboard.eventData)
+router.get('/admin/eventData', restrict, adminDashboard.eventData)
 
 // detail data webinar
-router.get('/admin/eventData/:id', adminDashboard.eventDetail)
+router.get('/admin/eventData/:id', restrict, adminDashboard.eventDetail)
+
+// mencari data webinar
+router.get('/admin/searchEvent', restrict, adminDashboard.searchEvent)
 
 // menuju form input webinar
-router.get('/admin/inputEvent', adminDashboard.inputEventForm)
+router.get('/admin/inputEvent', restrict, adminDashboard.inputEventForm)
 
 // memproses data webinar yang di-input
-router.post('/admin/inputEvent', uploadEventPoster.single('poster'), adminDashboard.inputEventProcess)
+router.post('/admin/inputEvent', restrict, uploadEventPoster.single('poster'), adminDashboard.inputEventProcess)
 
 // menuju form edit data webinar
-router.get('/admin/editEvent/:id', adminDashboard.editEventForm)
+router.get('/admin/editEvent/:id', restrict, adminDashboard.editEventForm)
 
 // memperoses edit data webinar
-router.post('/admin/editEvent/:id', adminDashboard.editEventProcess)
+router.post('/admin/editEvent/:id', restrict, adminDashboard.editEventProcess)
 
 // memproses edit poster webinar
-router.post('/admin/editEventPoster/:id', uploadEventPoster.single('poster'), adminDashboard.editEventPoster)
+router.post('/admin/editEventPoster/:id', restrict, uploadEventPoster.single('poster'), adminDashboard.editEventPoster)
 
 // data-data transaksi
-router.get('/admin/transactionData', adminDashboard.transactionData)
+router.get('/admin/transactionData', restrict, adminDashboard.transactionData)
 
 // detail data transaksi
-router.get('/admin/transactionData/:id', adminDashboard.transactionDetail)
+router.get('/admin/transactionData/:id', restrict, adminDashboard.transactionDetail)
 
 // laporan transaksi
-router.get('/admin/transactionReport', adminDashboard.transactionReport)
+router.get('/admin/transactionReport', restrict, adminDashboard.transactionReport)
 
 
 
 // LAIN-LAIN (trial & error)
 
-router.get('/countDate', coba.countDate)
-router.get('/printImg', coba.printImg)
-// router.get('/doubleForLoop', coba.doubleForLoop)
+router.get('/test', restrict, coba.test)
 
 module.exports = router

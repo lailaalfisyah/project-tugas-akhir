@@ -1,18 +1,13 @@
-const { Events, Coba, Transactions, Users } = require('../models')
+const { Events, Coba, Transactions, Users, General } = require('../models')
 const dateAndTime = require('date-and-time')
 const Sequelize = require('sequelize')
 const fs = require('fs')
+const jsdom = require('jsdom')
+const { Op } = require('sequelize')
 
 module.exports = {
-  countDate: (req, res) => {
-    let now = new Date()
-    let date = dateAndTime.format(now, 'DD MMM YYYY - HH:mm:ss')
-    console.log(now)
-    console.log(date)
-    res.end()
-  },
-
-  printImg: (req, res) => {
-    res.render('documents/certificate')
+  test: (req, res) => {
+    Users.changePassword(req.user, req.body)
+      .then(data => res.status(200).json(data))
   }
 }

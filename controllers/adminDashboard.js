@@ -3,14 +3,21 @@ const dateAndTime = require('date-and-time')
 const pdf = require('html-pdf')
 const fs = require('fs')
 const Mustache = require('mustache')
+const { Op } = require('sequelize')
 
 module.exports = {
   dashboard: (req, res) => {
-    // isi dengan count/perhitungan dari berbagai models
-    // letakkan saja hal-hal yang sekiranya pantas dipajang di dasbor
-    // contohnya jumlah users, events, transactions, dan total penghasilan
-    
-    res.render('adminDashboard/dashboard')
+    Users.count().then(countUsers => {
+      Events.count().then(countEvents => {
+        Transactions.count().then(countTransactions => {
+          res.render('adminDashboard/dashboard', {
+            countUsers,
+            countEvents,
+            countTransactions
+          })
+        })
+      })
+    })   
   },
 
   userData: (req, res) => {
@@ -32,28 +39,46 @@ module.exports = {
       }))
   },
 
+  searchUser: (req, res) => {
+    let { keyword } = req.query
+
+    Users.findAll({
+      where: {
+        [Op.or]: {
+          id: {
+            [Op.like]: `%${keyword}%`
+          },
+          username: {
+            [Op.like]: `%${keyword}%`
+          },
+          fullName: {
+            [Op.like]: `%${keyword}%`
+          },
+          email: {
+            [Op.like]: `%${keyword}%`
+          },
+          gender: {
+            [Op.like]: `%${keyword}%`
+          }
+        }
+      }
+    })
+      .then(data => res.render('adminDashboard/userData', { data }))
+  },
+
   eventData: (req, res) => {
     Events.findAll()
       .then(data => {
         let convertedDate = []
-        let convertedTimeStart = []
-        let convertedTimeEnd = []
 
         data.forEach(i => {
           convertDate = dateAndTime.transform(i.date, 'YYYY-MM-DD', 'dddd, DD MMMM YYYY')
-          convertTimeStart = dateAndTime.transform(i.timeStart, 'HH:mm:ss', 'HH.mm [WIB]')
-          convertTimeEnd = dateAndTime.transform(i.timeEnd, 'HH:mm:ss', 'HH.mm [WIB]')
-
           convertedDate.push(convertDate)
-          convertedTimeStart.push(convertTimeStart)
-          convertedTimeEnd.push(convertTimeEnd)
         })
 
         res.render('adminDashboard/eventData', {
           data,
-          convertedDate,
-          convertedTimeStart,
-          convertedTimeEnd
+          convertedDate
         })
       })       
   },
@@ -68,6 +93,42 @@ module.exports = {
         convertedTimeStart: dateAndTime.transform(data.timeStart, 'HH:mm:ss', 'HH.mm [WIB]'),
         convertedTimeEnd: dateAndTime.transform(data.timeEnd, 'HH:mm:ss', 'HH.mm [WIB]')
       }))
+  },
+
+  searchEvent: (req, res) => {
+    let { keyword } = req.query
+
+    Events.findAll({
+      where: {
+        [Op.or]: {
+          id: {
+            [Op.like]: `%${keyword}%`
+          },
+          token: {
+            [Op.like]: `%${keyword}%`
+          },
+          title: {
+            [Op.like]: `%${keyword}%`
+          },
+          date: {
+            [Op.like]: `%${keyword}%`
+          }
+        }
+      }
+    })
+      .then(data => {
+        let convertedDate = []
+
+        data.forEach(i => {
+          convertDate = dateAndTime.transform(i.date, 'YYYY-MM-DD', 'dddd, DD MMMM YYYY')
+          convertedDate.push(convertDate)
+        })
+
+        res.render('adminDashboard/eventData', {
+          data,
+          convertedDate
+        })
+      })
   },
 
   inputEventForm: (req, res) => {
@@ -138,7 +199,6 @@ module.exports = {
         convertedEventDate: dateAndTime.transform(data.Event.date, 'YYYY-MM-DD', 'dddd, DD MMMM YYYY'),
         convertedTimeStart: dateAndTime.transform(data.Event.timeStart, 'HH:mm:ss', 'HH.mm [WIB]'),
         convertedTimeEnd: dateAndTime.transform(data.Event.timeEnd, 'HH:mm:ss', 'HH.mm [WIB]')
-        // user: req.user.dataValues
       }))
   },
 

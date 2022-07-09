@@ -44,12 +44,29 @@ module.exports = (sequelize, DataTypes) => {
         })
         const isPasswordValid = user.checkPassword(password)
 
-        // if (!user) return Promise.reject('User not found!')
         if (!isPasswordValid) return Promise.reject('Wrong password')
         return Promise.resolve(user)
       } 
       catch(err) {
         return Promise.reject('User not found!')
+      }
+    }
+
+    static changePassword = async (user, { oldPassword, newPassword }) => {
+      try {
+        const isOldPasswordValid = user.checkPassword(oldPassword)
+        const encryptedPassword = this.#encrypt(newPassword)
+
+        if (!isOldPasswordValid) return Promise.reject('Old password is not valid')
+        return this.update({
+          password: encryptedPassword
+        }, {
+          where: {
+            id: user.id
+          }
+        })
+      } catch(err) {
+        return Promise.reject('Error system')
       }
     }
 
