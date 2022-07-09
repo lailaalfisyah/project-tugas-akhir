@@ -18,9 +18,9 @@ app.use(session({
   secret: 'Web Speak Up Now sebagai TA Laila',
   resave: false,
   saveUninitialized: false,
-  // cookie: {
-  //   expires: 60000
-  // }
+  cookie: {
+    expires: 300000
+  }
 }))
 
 // passport

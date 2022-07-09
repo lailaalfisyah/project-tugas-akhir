@@ -3,20 +3,23 @@ const passport = require('../lib/passport')
 
 module.exports = {
   registerForm: (req, res) => {
-    res.render('auth/register')
+    res.render('auth/register', {
+      title: 'Register'
+    })
   },
 
   registerProcess: (req, res, next) => {
     General.customID('U', Users)
       .then(customizedID => {
-        Users.register(customizedID, req.body, 2)
+        Users.register(customizedID, req.body, 1)
           .then(() => res.redirect('/login'))
-          .catch(err => next(err))
       })    
   },
 
   loginForm: (req, res) => {
-    res.render('auth/login')
+    res.render('auth/login', {
+      title: 'Login'
+    })
   },
 
   loginProcess: passport.authenticate('local', {
@@ -36,7 +39,9 @@ module.exports = {
   },
 
   changePasswordForm: (req, res) => {
-    res.render('auth/changePassword')
+    res.render('auth/changePassword', {
+      title: 'Change Password'
+    })
   },
 
   changePasswordProses: (req, res, next) => {

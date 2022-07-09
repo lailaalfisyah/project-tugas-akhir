@@ -11,6 +11,7 @@ module.exports = {
       Events.count().then(countEvents => {
         Transactions.count().then(countTransactions => {
           res.render('adminDashboard/dashboard', {
+            title: 'Admin Dashboard',
             countUsers,
             countEvents,
             countTransactions
@@ -24,6 +25,7 @@ module.exports = {
     Users.findAll()
       .then(data => {
         res.render('adminDashboard/userData', {
+          title: 'User Data',
           data
         })
       })
@@ -34,6 +36,7 @@ module.exports = {
       where: { id: req.params.id }
     })
       .then(data => res.render('adminDashboard/userDetail', {
+        title: 'User Detail',
         data,
         convertedDate: dateAndTime.transform(data.birthDate, 'YYYY-MM-DD', 'DD MMMM YYYY')
       }))
@@ -63,7 +66,10 @@ module.exports = {
         }
       }
     })
-      .then(data => res.render('adminDashboard/userData', { data }))
+      .then(data => res.render('adminDashboard/userData', { 
+        title: 'User Data',
+        data 
+      }))
   },
 
   eventData: (req, res) => {
@@ -77,6 +83,7 @@ module.exports = {
         })
 
         res.render('adminDashboard/eventData', {
+          title: 'Event Data',
           data,
           convertedDate
         })
@@ -88,6 +95,7 @@ module.exports = {
       where: { id: req.params.id }
     })
       .then(data => res.render('adminDashboard/eventDetail', {
+        title: 'Event Detail',
         data,
         convertedDate: dateAndTime.transform(data.date, 'YYYY-MM-DD', 'dddd, DD MMMM YYYY'),
         convertedTimeStart: dateAndTime.transform(data.timeStart, 'HH:mm:ss', 'HH.mm [WIB]'),
@@ -125,6 +133,7 @@ module.exports = {
         })
 
         res.render('adminDashboard/eventData', {
+          title: 'Event Data',
           data,
           convertedDate
         })
@@ -132,7 +141,9 @@ module.exports = {
   },
 
   inputEventForm: (req, res) => {
-    res.render('adminDashboard/inputEvent')
+    res.render('adminDashboard/inputEvent', {
+      title: 'Input Event',
+    })
   },
 
   inputEventProcess: (req, res) => {
@@ -148,6 +159,7 @@ module.exports = {
       where: { id: req.params.id }
     })
       .then(data => res.render('adminDashboard/editEvent', {
+        title: 'Edit Event',
         data
       }))
   },
@@ -177,8 +189,8 @@ module.exports = {
     })
       .then(data => {
         res.render('adminDashboard/transactionData', {
+          title: 'Transaction Data',
           data
-          // user: req.user.dataValues
         })
       })
   },
@@ -195,6 +207,7 @@ module.exports = {
       }]
     })
       .then(data => res.render('adminDashboard/transactionDetail', {
+        title: 'Transaction Detail',
         data, 
         convertedEventDate: dateAndTime.transform(data.Event.date, 'YYYY-MM-DD', 'dddd, DD MMMM YYYY'),
         convertedTimeStart: dateAndTime.transform(data.Event.timeStart, 'HH:mm:ss', 'HH.mm [WIB]'),
@@ -225,7 +238,7 @@ module.exports = {
           orientation: 'potrait'
         }
 
-        pdf.create(output, options).toFile('assets/documents/transactionReport.pdf', (err, data) => {
+        pdf.create(output, options).toFile('public/assets/documents/transactionReport.pdf', (err, data) => {
           if (err) return console.log(err)
           let report = fs.readFileSync(data.filename)
           res.contentType('application/pdf')

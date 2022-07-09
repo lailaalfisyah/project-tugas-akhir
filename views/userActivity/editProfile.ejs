@@ -12,7 +12,11 @@
     <div class="row justify-content-center">
       <div class="col-md-4 text-center">
         <form method="POST" action="/editProfilePicture" enctype="multipart/form-data">
-          <img src="/assets/img/profilePicture/<%= user.profilePicture %>" class="img-thumbnail rounded-circle" alt="" style="width: 15rem; height: 15rem;">
+          <% if (!user.profilePicture) { %>
+            <img src="/assets/img/user-icon.png" style="width: 15rem; height: 15rem;">
+          <% } else { %>  
+            <img src="/assets/img/profilePicture/<%= user.profilePicture %>" class="img-thumbnail mx-auto rounded-circle" style="width: 15rem; height: 15rem;">
+          <% } %>
           <br><br>
           <div class="mb-3">
             <label for="profilePicture" class="form-label">Change your profile picture here!</label>

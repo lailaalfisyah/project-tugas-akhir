@@ -6,11 +6,6 @@ const Mustache = require('mustache')
 const path = require('path')
 
 module.exports = {
-  // home: (req, res) => {
-  //   Events.findAll()
-  //     .then(data => res.render('home', { data }))
-  // },
-
   eventList: (req, res) => {
     Events.findAll()
       .then(data => {
@@ -29,6 +24,7 @@ module.exports = {
         })
 
         res.render('userActivity/eventList', {
+          title: 'HOME | Event List',
           data,
           convertedDate,
           convertedTimeStart,
@@ -43,6 +39,7 @@ module.exports = {
       where: { id: req.params.id }
     })
       .then(data => res.render('userActivity/eventDetail', {
+        title: 'Event Detail',
         data,
         convertedDate: dateAndTime.transform(data.date, 'YYYY-MM-DD', 'dddd, DD MMMM YYYY'),
         convertedTimeStart: dateAndTime.transform(data.timeStart, 'HH:mm:ss', 'HH.mm [WIB]'),
@@ -75,6 +72,7 @@ module.exports = {
       }]
     })
       .then(data => res.render('userActivity/transactionProof', {
+        title: 'Transaction Proof',
         data,
         convertedEventDate: dateAndTime.transform(data.Event.date, 'YYYY-MM-DD', 'dddd, DD MMMM YYYY'),
         convertedTimeStart: dateAndTime.transform(data.Event.timeStart, 'HH:mm:ss', 'HH.mm [WIB]'),
@@ -134,6 +132,7 @@ module.exports = {
     })
       .then(data => {
         res.render('userActivity/profile', {
+          title: 'My Profile',
           data,
           convertedDate: dateAndTime.transform(req.user.birthDate, 'YYYY-MM-DD', 'DD MMMM YYYY'),
           user: req.user.dataValues
@@ -146,6 +145,7 @@ module.exports = {
       where: { id: req.user.id }
     })
       .then(data => res.render('userActivity/editProfile', {
+        title: 'Edit Profile',
         data,
         user: req.user.dataValues
       }))

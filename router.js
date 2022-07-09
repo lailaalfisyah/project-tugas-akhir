@@ -7,11 +7,13 @@ const uploadEventPoster = multer({ dest: __dirname + '/public/assets/img/eventPo
 const auth = require('./controllers/auth')
 const adminDashboard = require('./controllers/adminDashboard')
 const userActivity = require('./controllers/userActivity')
-const coba = require('./controllers/coba')
 
 
 
 // AUTHENTICATION
+
+// halaman pembuka
+router.get('/', auth.loginForm)
 
 // menuju form registrasi
 router.get('/register', auth.registerForm)
@@ -47,9 +49,6 @@ router.post('/registerAdmin', auth.registerAdmin)
 
 // USER ACTIVITY
 
-// // landing page (tampilan daftar webinar sebelum login)
-// router.get('/', userActivity.home)
-
 // landing page (tampilan daftar webinar setelah login)
 router.get('/event', restrict, userActivity.eventList)
 
@@ -64,9 +63,6 @@ router.get('/transactionProof/:id', restrict, userActivity.transactionProof)
 
 // mencocokkan token webinar untuk mendapatkan akses menuju e-certificate
 router.post('/matchTheToken/:id', restrict, userActivity.matchTheToken)
-
-// // auto generate e-certificate
-// router.get('/certificate', restrict, userActivity.certificate)
 
 // menuju halaman profil
 router.get('/profile', restrict, userActivity.profile)
@@ -130,9 +126,5 @@ router.get('/admin/transactionData/:id', restrict, adminDashboard.transactionDet
 router.get('/admin/transactionReport', restrict, adminDashboard.transactionReport)
 
 
-
-// LAIN-LAIN (trial & error)
-
-router.get('/test', restrict, coba.test)
 
 module.exports = router

@@ -8,6 +8,9 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.STRING
       },
+      poster: {
+        type: Sequelize.STRING
+      },
       token: {
         allowNull: false,
         unique: true,

@@ -6,7 +6,11 @@
   <div class="container">
     <div class="row text-center">
       <div class="col-md-4 mx-auto">
-        <img src="/assets/img/profilePicture/<%= user.profilePicture %>" class="img-thumbnail mx-auto rounded-circle" alt="" style="width: 15rem; height: 15rem;">
+        <% if (!data.profilePicture) { %>
+          <img src="/assets/img/user-icon.png" style="width: 15rem; height: 15rem;">
+        <% } else { %>  
+          <img src="/assets/img/profilePicture/<%= data.profilePicture %>" class="img-thumbnail mx-auto rounded-circle" style="width: 15rem; height: 15rem;">
+        <% } %>
         <h2 class="text-warning text-center text-uppercase mb-3 mt-3"><%= data.fullName %></h2>
       </div>
     </div>
