@@ -13,7 +13,7 @@
   "test": {
     "username": "root",
     "password": null,
-    "database": "database_test",
+    "database": "speakupnow",
     "host": "127.0.0.1",
     "dialect": "mysql",
     "dialectOptions": {
@@ -24,7 +24,7 @@
   "production": {
     "username": "root",
     "password": null,
-    "database": "database_production",
+    "database": "speakupnow",
     "host": "127.0.0.1",
     "dialect": "mysql",
     "dialectOptions": {
