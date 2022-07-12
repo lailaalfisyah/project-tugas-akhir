@@ -24,7 +24,7 @@
   "production": {
     "username": "root",
     "password": null,
-    "database": "speakupnow",
+    "database": "speakupno",
     "host": "127.0.0.1",
     "dialect": "mysql",
     "dialectOptions": {
