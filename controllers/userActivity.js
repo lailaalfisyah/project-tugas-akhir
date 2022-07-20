@@ -94,7 +94,11 @@ module.exports = {
     })
       .then(data => {
         if (req.body.token !== data.Event.token) {
-          res.json('Invalid Token!')
+          // res.json('Invalid Token!')
+          const id = req.params.id
+          console.log(id)
+          req.flash('error', 'Invalid Token!')
+          res.redirect(`/transactionProof/${id}`)
         } else {
           let ejs = fs.readFileSync('views/documents/certificate.ejs', 'utf-8')
           let output = Mustache.render(ejs, {

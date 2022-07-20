@@ -6,11 +6,11 @@ module.exports = {
         allowNull: false,
         autoIncrement: false,
         primaryKey: true,
-        type: Sequelize.STRING
+        type: Sequelize.CHAR(8)
       },
       roleID: {
         allowNull: false,
-        type: Sequelize.INTEGER,
+        type: Sequelize.INTEGER(2),
         references: {
           model: 'Roles',
           key: 'id'
@@ -18,15 +18,15 @@ module.exports = {
       },
       fullName: {
         allowNull: false,
-        type: Sequelize.STRING
+        type: Sequelize.STRING(50)
       },
       email: {
         allowNull: false,
-        type: Sequelize.STRING
+        type: Sequelize.STRING(50)
       },
       username: {
         allowNull: false,
-        type: Sequelize.STRING,
+        type: Sequelize.STRING(20),
         unique: true
       },
       password: {
@@ -37,13 +37,13 @@ module.exports = {
         type: Sequelize.DATEONLY
       },
       gender: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(10)
       },
       domicile: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(50)
       },
       profession: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(20)
       },
       profilePicture: {
         type: Sequelize.STRING

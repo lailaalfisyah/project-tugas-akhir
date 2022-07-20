@@ -6,7 +6,7 @@ module.exports = {
         allowNull: false,
         autoIncrement: false,
         primaryKey: true,
-        type: Sequelize.STRING
+        type: Sequelize.CHAR(8)
       },
       poster: {
         type: Sequelize.STRING
@@ -14,10 +14,10 @@ module.exports = {
       token: {
         allowNull: false,
         unique: true,
-        type: Sequelize.STRING
+        type: Sequelize.STRING(15)
       },
       title: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(150)
       },
       date: {
         type: Sequelize.DATEONLY

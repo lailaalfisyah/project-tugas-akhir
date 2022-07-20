@@ -6,11 +6,11 @@ module.exports = {
         allowNull: false,
         autoIncrement: false,
         primaryKey: true,
-        type: Sequelize.STRING
+        type: Sequelize.CHAR(8)
       },
       userID: {
         allowNull: false,
-        type: Sequelize.STRING,
+        type: Sequelize.CHAR(8),
         references: {
           model: 'Users',
           key: 'id'
@@ -18,7 +18,7 @@ module.exports = {
       },
       eventID: {
         allowNull: false,
-        type: Sequelize.STRING,
+        type: Sequelize.CHAR(8),
         references: {
           model: 'Events',
           key: 'id'

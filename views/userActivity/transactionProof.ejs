@@ -30,7 +30,7 @@
               <p><%= data.createdAt %></p>
               <hr>
               <h6>Click link below to join the WhatsApp group <i class="fa-solid fa-down"></i></h6>
-              <a href="https://chat.whatsapp.com/LlpCQHiamWwAFR2EJ89sDw">https://chat.whatsapp.com/LlpCQHiamWwAFR2EJ89sDw</a>
+              <a href="https://chat.whatsapp.com/LlpCQHiamWwAFR2EJ89sDw" target="_blank">https://chat.whatsapp.com/LlpCQHiamWwAFR2EJ89sDw</a>
             </div>
           </div>
         </div>
@@ -38,7 +38,18 @@
     </div>
     <div class="row text-center justify-content-center">
       <div class="col-md-6">
-        <form method="POST" action="/matchTheToken/<%= data.id %>" target="_blank">
+
+        <% if(messages.error) { %> 
+          <div class="row justify-content-center">
+            <div class="col-md-8">
+              <p class="pt-1 pb-1 bg-danger text-light text-center text-uppercase fw-bold" role="alert">
+                <%= messages.error %>
+              </p>
+            </div>
+          </div>
+        <% } %>
+        
+        <form method="POST" action="/matchTheToken/<%= data.id %>">
           <div class="mb-3">
             <label for="token" class="form-label">If you have finished participating in the webinar, input the token given by the event organizer to get an e-certificate.</label>
             <input type="text" class="form-control" id="token" name="token">
