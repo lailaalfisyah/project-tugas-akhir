@@ -6,6 +6,33 @@ const Mustache = require('mustache')
 const path = require('path')
 
 module.exports = {
+  home: (req, res) => {
+    Events.findAll()
+      .then(data => {
+        let convertedDate = []
+        let convertedTimeStart = []
+        let convertedTimeEnd = []
+
+        data.forEach(i => {
+          convertDate = dateAndTime.transform(i.date, 'YYYY-MM-DD', 'dddd, DD MMMM YYYY')
+          convertTimeStart = dateAndTime.transform(i.timeStart, 'HH:mm:ss', 'HH.mm [WIB]')
+          convertTimeEnd = dateAndTime.transform(i.timeEnd, 'HH:mm:ss', 'HH.mm [WIB]')
+
+          convertedDate.push(convertDate)
+          convertedTimeStart.push(convertTimeStart)
+          convertedTimeEnd.push(convertTimeEnd)
+        })
+
+        res.render('userActivity/home', {
+          title: 'HOME | Event List',
+          data,
+          convertedDate,
+          convertedTimeStart,
+          convertedTimeEnd
+        })
+      })
+  },
+
   eventList: (req, res) => {
     Events.findAll()
       .then(data => {

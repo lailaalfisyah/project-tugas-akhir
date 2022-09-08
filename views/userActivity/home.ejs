@@ -1,0 +1,38 @@
+<%- include('../layouts/header') %>
+
+<nav class="navbar navbar-expand-md shadow-sm sticky-top navbar-light bg-light">
+  <div class="container-fluid">
+    <div>
+      <a class="navbar-brand fw-bold" href="#">FREE WEBINAR</a>
+    </div>
+    <div class="d-flex">
+      <ul class="navbar-nav align-item-center ms-3">
+        <li class="nav-item">
+          <a class="nav-link btn btn-warning btn-sm fw-bold" href="/login">Login</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<section class="section mt-5 mb-5">
+  <div class="container">
+    <div class="row text-center">
+      <% for (let i = 0; i < data.length; i++) { %>
+        <div class="col-md-4">
+        <div class="card mb-3">
+          <img src="/assets/img/eventPoster/<%= data[i].poster %>" class="card-img-top" alt="poster">
+          <div class="card-body">
+            <h5 class="card-title"><%= data[i].title %></h5>
+            <h6 class="card-subtitle mb-2 text-muted"><%= convertedDate[i] %></h6>
+            <h6 class="card-subtitle mb-2 text-muted"><%= convertedTimeStart[i] %> - <%= convertedTimeEnd[i] %> </h6>
+            <a href="/event/<%= data[i].id %>" class="btn btn-warning">Detail</a>
+          </div>
+        </div>
+      </div>
+      <% } %>
+    </div>
+  </div>
+</section>
+
+<%- include('../layouts/footer') %>

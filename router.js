@@ -12,9 +12,6 @@ const userActivity = require('./controllers/userActivity')
 
 // AUTHENTICATION
 
-// halaman pembuka
-router.get('/', auth.loginForm)
-
 // menuju form registrasi
 router.get('/register', auth.registerForm)
 
@@ -49,7 +46,10 @@ router.post('/registerAdmin', auth.registerAdmin)
 
 // USER ACTIVITY
 
-// landing page (tampilan daftar webinar setelah login)
+// index: tampilkan webinar sebelum login
+router.get('/', userActivity.home)
+
+// tampilan daftar webinar setelah login
 router.get('/event', restrict, userActivity.eventList)
 
 // menampilkan keterangan webinar secara detail
